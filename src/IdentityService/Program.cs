@@ -109,8 +109,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // 配置模型校验返回错误格式
 //builder.Services.ConfigureApiBehaviorOptions();
 
-// TODO:
-// builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+// mediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
