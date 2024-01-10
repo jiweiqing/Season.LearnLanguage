@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IdentityService.Domain
+﻿namespace IdentityService.Domain
 {
-    public class CreationEntity
+    public class CreationEntity:BaseEntity<long>, ICreationAuditedObject
     {
+        public CreationEntity(long id) : base(id)
+        {
+        }
+
+        public long? CreatorId { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }

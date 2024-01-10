@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace IdentityService.Domain
 {
-    public class Entity<TKey>
+    public class UserRole
     {
-        public Entity(TKey id)
-        {
-            Id = id;
-        }
-
-        public TKey Id { get; set; }
+        public long UserId {  get; set; }
+        public long RoleId { get; set; }
     }
 }

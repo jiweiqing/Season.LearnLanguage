@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace IdentityService.Domain
 {
-    internal class ModificationEntity
+    public class ModificationEntity : CreationEntity, IAuditedObject
     {
+        public ModificationEntity(long id) : base(id)
+        {
+        }
+
+        public long? ModifierId { get; set; }
+        public DateTime? ModificationTime { get; set; }
     }
 }

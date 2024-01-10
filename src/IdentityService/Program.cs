@@ -22,7 +22,7 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 });
 
 // dbcontext
-builder.Services.AddDbContext<IdentityDbContext>(options =>
+builder.Services.AddDbContext<IdentityServiceDbContext>(options =>
 {
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(builder.Configuration["Mysql:Version"]));
 });

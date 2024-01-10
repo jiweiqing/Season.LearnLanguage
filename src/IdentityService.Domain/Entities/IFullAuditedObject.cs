@@ -8,5 +8,8 @@ namespace IdentityService.Domain
 {
     public interface IFullAuditedObject: IAuditedObject
     {
+        public bool IsDeleted { get; set; }
+        public long? DeleterId { get; set; }
+        public DateTime? DeletionTime { get; set; }
     }
 }

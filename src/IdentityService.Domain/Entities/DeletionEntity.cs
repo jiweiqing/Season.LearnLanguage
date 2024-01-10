@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IdentityService.Domain
+﻿namespace IdentityService.Domain
 {
-    public class DeletionEntity
+    public class DeletionEntity : ModificationEntity, IFullAuditedObject
     {
+        public DeletionEntity(long id) : base(id)
+        {
+        }
+
+        public bool IsDeleted { get; set; }
+        public long? DeleterId { get; set; }
+        public DateTime? DeletionTime { get; set; }
     }
 }
