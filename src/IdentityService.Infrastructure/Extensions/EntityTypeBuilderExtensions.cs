@@ -31,6 +31,7 @@ namespace IdentityService.Infrastructure
             where TEntity : class
         {
             var type = typeof(TEntity);
+            // 需要优化 "" 
             var tableName = prefix == null ? type.Name : $"{prefix}{type.Name}";
             builder.ToTable(tableName);
             return builder;

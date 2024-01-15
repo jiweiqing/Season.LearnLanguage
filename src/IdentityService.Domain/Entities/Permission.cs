@@ -14,7 +14,7 @@ namespace IdentityService.Domain
 
         public string Name { get; set; } = string.Empty;
         public string Code { get; set; } = string.Empty;
-        public long? ParentPermissionId { get; set; }
+        public long? ParentId { get; set; }
         public int SortOrder { get; set; }
     }
 }

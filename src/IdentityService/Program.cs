@@ -8,8 +8,14 @@ using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 using MediatR;
+using IdentityService.Host;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 注册各个模块下的服务
+builder.Services.RunModuleInitializers();
 
 // Add services to the container.
 
@@ -49,9 +55,9 @@ builder.Services.AddSwaggerGen(options =>
     // TODO: API 版本控制
     options.SwaggerDoc("v1", new OpenApiInfo()
     {
-        Title = "后台管理Api文档",
+        Title = "学英语Api文档",
         Version = "v1",
-        Description = "后台管理Api文档v1"
+        Description = "学英语Api文档v1"
     });
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -59,7 +65,8 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Description = "JSON Web Token to access resources. Example: Bearer {token}",
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Authorization"
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -67,7 +74,10 @@ builder.Services.AddSwaggerGen(options =>
        {
          new OpenApiSecurityScheme
          {
-            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Authorization" },
+            Scheme = "Authorization",
+            Name = "Authorization",
+            In = ParameterLocation.Header
          },
          new [] { string.Empty }
        }
@@ -109,8 +119,23 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // 配置模型校验返回错误格式
 //builder.Services.ConfigureApiBehaviorOptions();
 
+// 配置时间格式
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
+});
+
 // mediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
+// forward headersOptions
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.All;
+});
+
+// TODO: AddFluentValidation
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
