@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityService.Infrastructure
+namespace IdentityService.Domain
 {
     public class JwtTokenDto
     {

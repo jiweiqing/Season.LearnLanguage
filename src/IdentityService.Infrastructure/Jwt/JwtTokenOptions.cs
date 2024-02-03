@@ -1,8 +1,8 @@
-﻿namespace IdentityService.Host
+﻿namespace IdentityService.Infrastructure
 {
     public class JwtTokenOptions
     {
-        public const string SectionName = "JwtToken";
+        public const string SectionName = "Jwt";
         public string Issuer { get; set; } = string.Empty;
         public string Audience { get; set; } = string.Empty;
         public string SecurityKey { get; set; } = string.Empty;

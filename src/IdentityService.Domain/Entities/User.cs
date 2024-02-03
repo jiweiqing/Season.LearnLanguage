@@ -26,5 +26,12 @@ namespace IdentityService.Domain
         /// 上次登录时间
         /// </summary>
         public DateTime? LastLoginTime { set; get; }
+
+        public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
+        public void UpdateLastLoginTime()
+        {
+            LastLoginTime = DateTime.Now;
+        }
     }
 }

@@ -11,6 +11,7 @@ using MediatR;
 using IdentityService.Host;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.HttpOverrides;
+using IdentityService.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +49,6 @@ builder.Services.AddCors(options =>
         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-
 // swagger
 builder.Services.AddSwaggerGen(options =>
 {
@@ -60,6 +60,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "学英语Api文档v1"
     });
 
+    // 与OpenApiSecurityScheme的id相关联
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -74,10 +75,10 @@ builder.Services.AddSwaggerGen(options =>
        {
          new OpenApiSecurityScheme
          {
-            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Authorization" },
-            Scheme = "Authorization",
-            Name = "Authorization",
-            In = ParameterLocation.Header
+            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
+            //Scheme = "Authorization",
+            //Name = "oauth2",
+            //In = ParameterLocation.Header
          },
          new [] { string.Empty }
        }
@@ -155,8 +156,18 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
+app.UseCurrentUser();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    var seederService = services.GetRequiredService<IIdentitySeederService>();
+    await seederService.SeedAsync();
+}
 
 app.Run();
