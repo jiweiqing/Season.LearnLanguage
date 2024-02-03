@@ -18,6 +18,9 @@ namespace IdentityService.Infrastructure
 
             var optionsBulider = new DbContextOptionsBuilder<IdentityServiceDbContext>();
             optionsBulider.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(configuration["Mysql:Version"]));
+
+            //optionsBulider.UseMySql("Server=localhost;Port=3306;Database=seasonapp;Uid=root;Pwd=async_await;", new MySqlServerVersion(configuration["Mysql:Version"]));
+
             return new IdentityServiceDbContext(optionsBulider.Options);
         }
     }
