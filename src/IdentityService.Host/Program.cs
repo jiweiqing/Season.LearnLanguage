@@ -167,6 +167,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseAutoSaveChange();
+
 using (var serviceScope = app.Services.CreateScope())
 {
     var services = serviceScope.ServiceProvider;

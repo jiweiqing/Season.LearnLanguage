@@ -7,13 +7,13 @@ namespace IdentityService.Infrastructure
 {
     public static class EntityTypeBuilderExtensions
     {
-        public static EntityTypeBuilder ToTable<TKey, TEntity>(this EntityTypeBuilder builder, string? prefix = null) where TEntity : BaseEntity<TKey>
+        public static EntityTypeBuilder ToTable<TKey, TEntity>(this EntityTypeBuilder builder, string? prefix = null) where TEntity : EntityBase<TKey>
         {
             ToTable<TEntity>(builder, prefix);
             //Type entityType = builder.Metadata.ClrType;
             var entityType = typeof(TEntity);
             // 主键
-            builder.HasKey(nameof(BaseEntity<TKey>.Id));
+            builder.HasKey(nameof(EntityBase<TKey>.Id));
 
             if (entityType.IsAssignableTo(typeof(IFullAuditedObject)))
             {
