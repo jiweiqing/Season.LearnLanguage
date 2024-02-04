@@ -12,6 +12,8 @@ using IdentityService.Host;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.HttpOverrides;
 using IdentityService.Domain;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.RunModuleInitializers();
 
 // Add services to the container.
+builder.Services.AutomaticRegisterService();
 
 // log
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
@@ -112,13 +115,13 @@ builder.Services.AddMemoryCache();
 // todo: redis
 
 // 给接口添加返回值描述
-// builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApplicationModelProvider, ProduceResponseTypeModelProvider>());
+builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApplicationModelProvider, ProduceResponseTypeModelProvider>());
 
 // auto mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // 配置模型校验返回错误格式
-//builder.Services.ConfigureApiBehaviorOptions();
+builder.Services.ConfigureApiBehaviorOptions();
 
 // 配置时间格式
 builder.Services.Configure<JsonOptions>(options =>

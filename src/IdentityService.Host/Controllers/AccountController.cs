@@ -13,6 +13,7 @@ namespace IdentityService.Host
         {
         }
 
+        [HttpGet]
         public JwtTokenDto Login(LoginInput input)
         {
             //

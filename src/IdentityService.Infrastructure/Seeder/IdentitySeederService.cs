@@ -54,6 +54,7 @@ namespace IdentityService.Infrastructure
             //};
 
             await _dbContext.AddAsync(role);
+            await _dbContext.SaveChangesAsync();
         }
 
         private async Task InitUserAsync()
@@ -68,6 +69,7 @@ namespace IdentityService.Infrastructure
             user.NickName = "admin";
             user.Password = EncryptHelper.MD5Encrypt("123456");
             user.Email = "jiweiqing7@hotmail.com";
+            user.CreationTime = DateTime.Now;
 
             var role = await _dbContext.Roles.Where(r => r.Code == "Admin").FirstAsync();
 
