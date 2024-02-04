@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IdentityService.Domain
 {
-    public interface IUserRepository
+    public interface IUserRepository : IScopedDependency
     {
-        Task<User?> GetUserByName(string userName, string password);
-        Task<User> UpdateAsync(User user,
+        Task<User?> GetUserByName(string userName);
+        Task UpdateAsync(User user,
             bool autoSave = false,
             CancellationToken cancellationToken = default);
     }

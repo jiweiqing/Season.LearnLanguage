@@ -17,6 +17,7 @@ namespace IdentityService.Domain
             YitIdHelper.SetIdGenerator(options);
 
             //var newId = YitIdHelper.NextId();
+            services.AddScoped<UserDomainService>();
         }
     }
 }

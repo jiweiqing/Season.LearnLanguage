@@ -29,6 +29,11 @@ namespace IdentityService.Host
             return services;
         }
        
+        /// <summary>
+        /// 批量注册服务
+        /// TODO: 还未实现注入普通类，不实现接口
+        /// </summary>
+        /// <param name="services"></param>
         public static void AutomaticRegisterService(this IServiceCollection services)
         {
             string path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;

@@ -9,15 +9,22 @@ namespace IdentityService.Host
     [ApiController]
     public class AccountController : ControllerBase
     {
-        public AccountController() 
+        private readonly UserDomainService _userService;
+        public AccountController(UserDomainService userService) 
         {
+            _userService = userService;
         }
 
-        [HttpGet]
-        public JwtTokenDto Login(LoginInput input)
+        /// <summary>
+        /// 用户名密码登录
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost("login")]
+        public async Task<ActionResult<JwtTokenDto>> Login(LoginInput input)
         {
-            //
-            throw new BusinessException();
+            var token = await _userService.LoginByUserName(input.UserName, input.Password);
+            return Ok(token);
         }
     }
 }

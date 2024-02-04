@@ -142,6 +142,8 @@ builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.Configure<JwtTokenOptions>(builder.Configuration.GetSection(JwtTokenOptions.SectionName));
 // TODO: AddFluentValidation
 
+// service
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
