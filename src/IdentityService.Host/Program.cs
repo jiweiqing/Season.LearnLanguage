@@ -155,7 +155,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllCrosDomainsPolicy");
 
-app.UseForwardedHeaders();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
 
 app.UseHttpsRedirection();
 
