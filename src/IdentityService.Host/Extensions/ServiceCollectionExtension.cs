@@ -38,7 +38,7 @@ namespace IdentityService.Host
         {
             string path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
 
-            var referencedAssemblies = Directory.GetFiles(path, "*.dll").Select(Assembly.LoadFrom).ToArray();
+            var referencedAssemblies = Directory.GetFiles(path, "IdentityService.*.dll").Select(Assembly.LoadFrom).ToArray();
 
             var allTypes = referencedAssemblies.SelectMany(a => a.GetTypes());
 
