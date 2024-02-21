@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IdentityService.Domain
 {
-    public interface IJwtTokenService
+    public interface IJwtService
     {
         /// <summary>
         /// create token
@@ -15,13 +15,15 @@ namespace IdentityService.Domain
         /// <param name="userId">userId</param>
         /// <param name="claims">claims</param>
         /// <returns></returns>
-        JwtTokenDto CreateToken(long userId, IEnumerable<Claim> claims);
+        JwtDto CreateToken(long userId, IEnumerable<Claim> claims);
 
         /// <summary>
-        /// get user id by refresh token
+        /// 校验token
         /// </summary>
-        /// <param name="refreshToken">refreshToken</param>
+        /// <param name="accessToken">accessToken</param>
+        /// <param name="refreshToken">accessToken</param>
+        /// <param name="userId">userId</param>
         /// <returns></returns>
-        long GetUserIdByRefreshToken(string refreshToken);
+        bool ValidateToken(string accessToken, string refreshToken, out long userId);
     }
 }

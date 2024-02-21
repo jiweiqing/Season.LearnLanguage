@@ -138,8 +138,8 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHeaders = ForwardedHeaders.All;
 });
 
-builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
-builder.Services.Configure<JwtTokenOptions>(builder.Configuration.GetSection(JwtTokenOptions.SectionName));
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.SectionName));
 // TODO: AddFluentValidation
 
 // service

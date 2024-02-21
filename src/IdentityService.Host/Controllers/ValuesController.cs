@@ -13,8 +13,8 @@ namespace IdentityService.Host.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IJwtTokenService _jwtTokenService;
-        public ValuesController(IJwtTokenService jwtTokenService)
+        private readonly IJwtService _jwtTokenService;
+        public ValuesController(IJwtService jwtTokenService)
         {
             _jwtTokenService = jwtTokenService;
         }
@@ -53,7 +53,7 @@ namespace IdentityService.Host.Controllers
 
         [NonAction]
         [HttpGet("token")]
-        public JwtTokenDto GetToken()
+        public JwtDto GetToken()
         {
             long iat = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 

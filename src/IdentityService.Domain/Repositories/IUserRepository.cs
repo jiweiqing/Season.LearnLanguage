@@ -1,10 +1,7 @@
 ﻿namespace IdentityService.Domain
 {
-    public interface IUserRepository : IScopedDependency
+    public interface IUserRepository : IRepository<long,User>, IScopedDependency
     {
         Task<User?> GetUserByName(string userName);
-        Task UpdateAsync(User user,
-            bool autoSave = false,
-            CancellationToken cancellationToken = default);
     }
 }

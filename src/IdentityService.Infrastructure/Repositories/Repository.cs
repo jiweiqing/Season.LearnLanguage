@@ -16,6 +16,7 @@ namespace IdentityService.Infrastructure
             Context = context;
         }
 
+        // TODO:改为dbcontext的基类
         public IdentityServiceDbContext Context { get; }
 
         public DbSet<TEntity> DbSet => Context.Set<TEntity>();

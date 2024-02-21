@@ -11,14 +11,14 @@ namespace IdentityService.Domain
     public class UserDomainService
     {
         private readonly IUserRepository _repository;
-        private readonly IJwtTokenService _jwtService;
-        public UserDomainService(IUserRepository repository, IJwtTokenService jwtService)
+        private readonly IJwtService _jwtService;
+        public UserDomainService(IUserRepository repository, IJwtService jwtService)
         {
             _repository = repository;
             _jwtService = jwtService;
         }
 
-        public async Task<JwtTokenDto> LoginByUserName(string userName, string password)
+        public async Task<JwtDto> LoginByUserNameAsync(string userName, string password)
         {
             // TODO: 发布领域事件登录日志成功后者失败
             User? user = await _repository.GetUserByName(userName);
@@ -34,6 +34,40 @@ namespace IdentityService.Domain
             user.UpdateLastLoginTime();
 
             await _repository.UpdateAsync(user);
+
+            long iat = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString(),ClaimValueTypes.String),
+                new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString(),ClaimValueTypes.Integer64),
+                new Claim(JwtRegisteredClaimNames.Iat, iat.ToString(), ClaimValueTypes.Integer64)
+            };
+
+            return _jwtService.CreateToken(user.Id, claims);
+        }
+
+        /// <summary>
+        /// 刷新token
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public async Task<JwtDto> RefreshTokenAsync(string accessToken,string refreshToken)
+        {
+            bool result = _jwtService.ValidateToken(accessToken, refreshToken,out long userId);
+            if (!result)
+            {
+                throw new BusinessException("token非法");
+            }
+
+            // TODO：后续可以加是否禁用
+            User? user = await _repository.GetAsync(userId);
+            if (user == null)
+            {
+                throw new BusinessException("token非法");
+            }
 
             long iat = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 

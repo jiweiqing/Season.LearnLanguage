@@ -1,6 +1,4 @@
 ﻿using IdentityService.Domain;
-using IdentityService.Infrastructure;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityService.Host
@@ -21,10 +19,22 @@ namespace IdentityService.Host
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost("login")]
-        public async Task<ActionResult<JwtTokenDto>> Login(LoginInput input)
+        public async Task<ActionResult<JwtDto>> Login(LoginInput input)
         {
-            var token = await _userService.LoginByUserName(input.UserName, input.Password);
+            var token = await _userService.LoginByUserNameAsync(input.UserName, input.Password);
             return Ok(token);
+        }
+
+        /// <summary>
+        /// 刷新token
+        /// </summary>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        [HttpGet("refresh-token")]
+        public async Task<JwtDto> RefreshToken(string refreshToken)
+        {
+            var accessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+            return await _userService.RefreshTokenAsync(accessToken, refreshToken);
         }
     }
 }
