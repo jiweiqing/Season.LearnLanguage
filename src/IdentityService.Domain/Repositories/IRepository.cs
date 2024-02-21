@@ -3,7 +3,6 @@
 namespace IdentityService.Domain
 {
     /// <summary>
-    /// IRepository<TEntity>
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     public interface IRepository<TEntity> where TEntity : class
@@ -76,7 +75,6 @@ namespace IdentityService.Domain
     }
 
     /// <summary>
-    /// IRepository<TKey, TEntity>
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TEntity"></typeparam>
