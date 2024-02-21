@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityService.Host
 {
+    /// <summary>
+    /// 账号相关
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase

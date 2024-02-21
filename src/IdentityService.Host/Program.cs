@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using IdentityService.Domain;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,6 +87,13 @@ builder.Services.AddSwaggerGen(options =>
          new [] { string.Empty }
        }
     });
+
+    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+    string[] xmlFiles = Directory.GetFiles(path, "IdentityService.*.xml");
+    foreach (string xmlFile in xmlFiles)
+    {
+        options.IncludeXmlComments(xmlFile, true);
+    }
 });
 
 // authentication
