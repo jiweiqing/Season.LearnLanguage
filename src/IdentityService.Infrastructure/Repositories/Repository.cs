@@ -13,13 +13,13 @@ namespace IdentityService.Infrastructure
     {
         public Repository(IdentityServiceDbContext context)
         {
-            Context = context;
+            EfContext = context;
         }
 
         // TODO:改为dbcontext的基类
-        public IdentityServiceDbContext Context { get; }
+        public IdentityServiceDbContext EfContext { get; }
 
-        public DbSet<TEntity> DbSet => Context.Set<TEntity>();
+        public DbSet<TEntity> DbSet => EfContext.Set<TEntity>();
 
         public async Task<TEntity> InsertAsync(
             TEntity entity,
@@ -29,7 +29,7 @@ namespace IdentityService.Infrastructure
             await DbSet.AddAsync(entity, cancellationToken);
             if (autoSave)
             {
-                await Context.SaveChangesAsync(cancellationToken);
+                await EfContext.SaveChangesAsync(cancellationToken);
             }
             return entity;
         }
@@ -42,7 +42,7 @@ namespace IdentityService.Infrastructure
             DbSet.Update(entity);
             if (autoSave)
             {
-                await Context.SaveChangesAsync(cancellationToken);
+                await EfContext.SaveChangesAsync(cancellationToken);
             }
             return entity;
         }
@@ -55,7 +55,7 @@ namespace IdentityService.Infrastructure
             DbSet.Remove(entity);
             if (autoSave)
             {
-                await Context.SaveChangesAsync(cancellationToken);
+                await EfContext.SaveChangesAsync(cancellationToken);
             }
         }
 

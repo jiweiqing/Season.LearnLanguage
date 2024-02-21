@@ -1,6 +1,6 @@
 ﻿namespace IdentityService.Host
 {
-    public class PagedInput
+    public class PagedDto
     {
 
     }

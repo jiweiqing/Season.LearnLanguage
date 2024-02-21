@@ -1,6 +1,7 @@
 ﻿namespace IdentityService.Host
 {
-    public class QueryUserInput : PagedDto
+    public class GetUsersDto : PagedDto
     {
+
     }
 }

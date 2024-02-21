@@ -14,8 +14,4 @@
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Inputs\" />
-  </ItemGroup>
-
 </Project>
