@@ -14,23 +14,14 @@ namespace IdentityService.Infrastructure
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
-        /// <param name="istrue"></param>
+        /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> source, bool istrue, Expression<Func<TSource, bool>> predicate)
+        public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, bool>> predicate)
         {
-            if (istrue)
+            if (condition && predicate != null)
             {
-                source = source.Where(predicate);
-            }
-            return source;
-        }
-
-        public static IQueryable<TSource> WhereIf2<TSource>(this IQueryable<TSource> source, bool istrue, Func<TSource, bool> predicate)
-        {
-            if (istrue)
-            {
-                var s = source.AsEnumerable().Where(predicate);
+                return source.Where(predicate);
             }
             return source;
         }

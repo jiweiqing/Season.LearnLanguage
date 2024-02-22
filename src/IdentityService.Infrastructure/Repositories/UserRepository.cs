@@ -23,12 +23,9 @@ namespace IdentityService.Infrastructure
 
         public async Task<List<User>> GetListAsync(GetUsersInput input)
         {
-            var query = DbSet
-                .WhereIf(!string.IsNullOrWhiteSpace(input.UserName), u => u.UserName.Contains(input.UserName!))
-                .WhereIf(!string.IsNullOrWhiteSpace(input.NickName), u => u.NickName.Contains(input.NickName!))
-                .WhereIf(!string.IsNullOrWhiteSpace(input.Email), u => u.Email == input.Email);
+            var query = Build(DbSet,input);
 
-            query = query.OrderByDescending(u=>u.CreationTime).Skip(input.SkipCount).Take(input.MaxResultCount);
+            query = query.OrderByDescending(u => u.CreationTime).Skip(input.SkipCount).Take(input.MaxResultCount);
             return await query.ToListAsync();
         }
 
@@ -40,6 +37,16 @@ namespace IdentityService.Infrastructure
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Email), u => u.Email == input.Email);
 
             return await query.CountAsync();
+        }
+
+        private IQueryable<User> Build(IQueryable<User> query, GetUsersInput input)
+        {
+            query = query
+                .WhereIf(!string.IsNullOrWhiteSpace(input.UserName), u => u.UserName.Contains(input.UserName!))
+                .WhereIf(!string.IsNullOrWhiteSpace(input.NickName), u => u.NickName.Contains(input.NickName!))
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Email), u => u.Email == input.Email);
+
+            return query;
         }
     }
 }
