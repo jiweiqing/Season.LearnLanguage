@@ -15,5 +15,7 @@ namespace IdentityService.Domain
         }
         public long UserId {  get; set; }
         public long RoleId { get; set; }
+
+        public Role? Role { get; set; }
     }
 }

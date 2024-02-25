@@ -10,6 +10,10 @@ namespace IdentityService.Infrastructure
         {
             builder.ToTable<UserRole>();
             builder.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+            // 导航属性
+            builder.HasOne<User>().WithMany(u => u.UserRoles).HasForeignKey(ur => ur.UserId);
+            builder.HasOne(ur => ur.Role).WithMany().HasForeignKey(ur => ur.RoleId);
         }
     }
 }
