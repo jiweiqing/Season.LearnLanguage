@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Yitter.IdGenerator;
 
 namespace IdentityService.Domain
 {
@@ -28,6 +30,27 @@ namespace IdentityService.Domain
         public DateTime? LastLoginTime { set; get; }
 
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
+
+        public static User Create(string userName, string nickName, string? email, string password)
+        {
+            User user = new User(YitIdHelper.NextId())
+            {
+                UserName = userName,
+                NickName = nickName,
+                Email = email,
+                Password = EncryptHelper.MD5Encrypt(password)
+            };
+
+            return user;
+        }
+
+        public User Update(string nickName,string? email)
+        {
+            this.NickName = nickName;
+            this.Email = email;
+            return this;
+        }
 
         public void UpdateLastLoginTime()
         {

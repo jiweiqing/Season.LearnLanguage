@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace IdentityService.Domain
 {
     /// <summary>
-    /// 查询用户输入
+    /// 包含导航属性
     /// </summary>
-    public class GetUsersInput: PagedInput
+    public class IncludesUsersInput: GetUsersInput
     {
-        public string? UserName { get; set; }
-        public string? NickName { get; set; }
-        public string? Email { get; set; }
+        /// <summary>
+        /// 包含用户角色
+        /// </summary>
+        public bool IncludeUserRole { get; set; }
     }
 }

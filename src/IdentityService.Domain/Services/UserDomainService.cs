@@ -54,9 +54,9 @@ namespace IdentityService.Domain
         /// <param name="refreshToken"></param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public async Task<JwtDto> RefreshTokenAsync(string accessToken,string refreshToken)
+        public async Task<JwtDto> RefreshTokenAsync(string accessToken, string refreshToken)
         {
-            bool result = _jwtService.ValidateToken(accessToken, refreshToken,out long userId);
+            bool result = _jwtService.ValidateToken(accessToken, refreshToken, out long userId);
             if (!result)
             {
                 throw new BusinessException("token非法");
@@ -79,6 +79,45 @@ namespace IdentityService.Domain
             };
 
             return _jwtService.CreateToken(user.Id, claims);
+        }
+
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="nickName">昵称</param>
+        /// <param name="email">邮箱</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        public async Task<User> CreateUserAsync(string userName, string nickName, string? email, string password)
+        {
+            // TODO:校验用户名，邮箱是否存在
+            User user = User.Create(userName, nickName, email, password);
+            // 创建用户
+            await _repository.InsertAsync(user);
+            return user;
+        }
+
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <param name="nickName">昵称</param>
+        /// <param name="email">邮箱</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public async Task<User> UpdateUserAsync(long id, string nickName,string? email)
+        {
+            var user = await _repository.GetAsync(id);
+            if (user == null)
+            {
+                throw new BusinessException("target not found");
+            }
+
+            // TODO:校验用户名，邮箱是否存在
+            user.Update(nickName, email);
+
+            return user;
         }
     }
 }

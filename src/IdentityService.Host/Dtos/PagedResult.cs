@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Host.Dtos
+﻿namespace IdentityService.Host
 {
     public class PagedResult<T>
     {
@@ -13,11 +13,12 @@
         }
         public long TotalCount { get; set; }
 
-        public long PageNumber { get; private set; }
+        //public long PageNumber { get; private set; }
 
-        public long PageSize { get; private set; }
+        //public long PageSize { get; private set; }
 
-        public long TotalPages { get; private set; }
-        public List<T> Items { get; set; }
+        //public long TotalPages => TotalCount / PageSize;
+
+        public IList<T> Items { get; set; }
     }
 }
