@@ -9,7 +9,8 @@ namespace IdentityService.Host
         /// 昵称
         /// </summary>
         [MaxLength(FieldConstants.MaxNameLength)]
-        public string? NickName { get; set; }
+        [Required]
+        public string NickName { get; set; } = string.Empty;
         /// <summary>
         /// 邮箱
         /// </summary>

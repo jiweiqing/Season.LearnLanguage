@@ -91,8 +91,22 @@ namespace IdentityService.Domain
         /// <returns></returns>
         public async Task<User> CreateUserAsync(string userName, string nickName, string? email, string password)
         {
-            // TODO:校验用户名，邮箱是否存在
-            User user = User.Create(userName, nickName, email, password);
+            // 校验用户名和邮箱是否已存在
+            var user = await _repository.GetUserByName(userName);
+            if (user != null)
+            {
+                throw new BusinessException("用户名已存在!");
+            }
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                user = await _repository.GetUserByEmailAsync(email);
+                if (user != null)
+                {
+                    throw new BusinessException("邮箱已存在!");
+                }
+            }
+
+            user = User.Create(userName, nickName, email, password);
             // 创建用户
             await _repository.InsertAsync(user);
             return user;
@@ -106,7 +120,7 @@ namespace IdentityService.Domain
         /// <param name="email">邮箱</param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public async Task<User> UpdateUserAsync(long id, string nickName,string? email)
+        public async Task<User> UpdateUserAsync(long id, string nickName, string? email)
         {
             var user = await _repository.GetAsync(id);
             if (user == null)
@@ -114,9 +128,15 @@ namespace IdentityService.Domain
                 throw new BusinessException("target not found");
             }
 
-            // TODO:校验用户名，邮箱是否存在
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                var checkUser = await _repository.GetUserByEmailAsync(email);
+                if (checkUser != null && checkUser.Id != user.Id)
+                {
+                    throw new BusinessException("邮箱已存在!");
+                }
+            }
             user.Update(nickName, email);
-
             return user;
         }
     }

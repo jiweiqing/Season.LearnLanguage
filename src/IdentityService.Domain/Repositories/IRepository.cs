@@ -82,7 +82,7 @@ namespace IdentityService.Domain
     {
         Task DeleteAsync(
             TKey id,
-            bool autoSave,
+            bool autoSave = false,
             CancellationToken cancellationToken = default);
         Task<TEntity?> GetAsync(
             TKey id,

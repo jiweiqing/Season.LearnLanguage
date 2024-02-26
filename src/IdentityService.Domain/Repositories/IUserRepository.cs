@@ -10,6 +10,13 @@
         Task<User?> GetUserByName(string userName);
 
         /// <summary>
+        /// 依据邮箱查询用户
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        Task<User?> GetUserByEmailAsync(string email);
+
+        /// <summary>
         /// 获取用户列表
         /// </summary>
         /// <param name="input"></param>

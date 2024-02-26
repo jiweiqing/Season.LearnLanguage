@@ -21,6 +21,11 @@ namespace IdentityService.Infrastructure
             return _dbContext.Users.Where(u => u.UserName == userName).SingleOrDefaultAsync();
         }
 
+        public Task<User?> GetUserByEmailAsync(string email)
+        {
+            return _dbContext.Users.Where(u => u.Email == email).SingleOrDefaultAsync();
+        }
+
         public async Task<List<User>> GetListAsync(IncludesUsersInput input)
         {
             var query = Build(DbSet, input);
@@ -65,5 +70,7 @@ namespace IdentityService.Infrastructure
 
             return query;
         }
+
+        
     }
 }

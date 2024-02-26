@@ -163,6 +163,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllCrosDomainsPolicy");
 
+app.UseAppExceptionHandler(app.Environment);
+
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.All

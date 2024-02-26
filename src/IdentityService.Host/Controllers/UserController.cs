@@ -74,7 +74,30 @@ namespace IdentityService.Host.Controllers
 
             var dto = _mapper.Map<UserDto>(user);
 
-            return Created("", dto); // TODO:
+            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id }, user);
+        }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="id">用户id</param>
+        /// <param name="updateDto">输入参数</param>
+        /// <returns></returns>
+        [HttpPut("{id:long}")]
+        public async Task UpdateAsync(long id, UpdateUserDto updateDto)
+        {
+            await _userDomainService.UpdateUserAsync(id, updateDto.NickName, updateDto.Email);
+        }
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id:long}")]
+        public async Task DeleteAsync(long id)
+        {
+            await _userRepository.DeleteAsync(id);
         }
     }
 }
