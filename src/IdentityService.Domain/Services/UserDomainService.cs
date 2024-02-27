@@ -44,6 +44,11 @@ namespace IdentityService.Domain
                 new Claim(JwtRegisteredClaimNames.Iat, iat.ToString(), ClaimValueTypes.Integer64)
             };
 
+
+            if (user.UserName == "admin")
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Admin", ClaimValueTypes.String));
+            }
             return _jwtService.CreateToken(user.Id, claims);
         }
 
@@ -77,6 +82,8 @@ namespace IdentityService.Domain
                 new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString(),ClaimValueTypes.Integer64),
                 new Claim(JwtRegisteredClaimNames.Iat, iat.ToString(), ClaimValueTypes.Integer64)
             };
+
+            claims.Add(new Claim(ClaimTypes.Role, "Admin", ClaimValueTypes.String));
 
             return _jwtService.CreateToken(user.Id, claims);
         }

@@ -1,4 +1,5 @@
 ﻿using IdentityService.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityService.Host
@@ -7,6 +8,7 @@ namespace IdentityService.Host
     /// 账号相关
     /// </summary>
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin")]
     [ApiController]
     public class AccountController : ControllerBase
     {

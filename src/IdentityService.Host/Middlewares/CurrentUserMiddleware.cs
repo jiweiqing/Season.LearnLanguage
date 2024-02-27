@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using IdentityService.Domain;
+using System.Security.Claims;
 
 namespace IdentityService.Host
 {
@@ -10,7 +11,7 @@ namespace IdentityService.Host
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context,CurrentUserContext currentUser)
         {
             // 是否认证通过
             if (context.User != null && context.User.Identity != null && context.User.Identity.IsAuthenticated)
@@ -19,7 +20,7 @@ namespace IdentityService.Host
                 Claim? claim = context.User.FindFirst(ClaimTypes.NameIdentifier);
                 if (claim != null)
                 {
-                    //currentUser.SetValue(Convert.ToInt64(claim.Value));
+                    currentUser.SetValue(Convert.ToInt64(claim.Value));
                 }
             }
 

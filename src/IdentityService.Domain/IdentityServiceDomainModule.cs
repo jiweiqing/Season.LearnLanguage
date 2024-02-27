@@ -18,6 +18,7 @@ namespace IdentityService.Domain
 
             //var newId = YitIdHelper.NextId();
             services.AddScoped<UserDomainService>();
+            services.AddScoped<CurrentUserContext>();
         }
     }
 }
