@@ -32,6 +32,8 @@ namespace IdentityService.Domain
             }
 
             user.UpdateLastLoginTime();
+            // 每次登录version加1,可以适用于限制同一个账号登录。 TODO:需要考虑一下多客户端
+            user.UpdateVersion();
 
             await _repository.UpdateAsync(user);
 
@@ -41,7 +43,8 @@ namespace IdentityService.Domain
             {
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString(),ClaimValueTypes.String),
                 new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString(),ClaimValueTypes.Integer64),
-                new Claim(JwtRegisteredClaimNames.Iat, iat.ToString(), ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Iat, iat.ToString(), ClaimValueTypes.Integer64),
+                new Claim(IdentityContants.Version,user.JwtVersion.ToString(),ClaimValueTypes.Integer32)
             };
 
 
@@ -74,6 +77,7 @@ namespace IdentityService.Domain
                 throw new BusinessException("token非法");
             }
 
+            // TODO:如果refresh token没有过期,那么重新生成refresh token时就不更新refresh token
             long iat = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 
             var claims = new List<Claim>

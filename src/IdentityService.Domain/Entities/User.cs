@@ -29,6 +29,11 @@ namespace IdentityService.Domain
         /// </summary>
         public DateTime? LastLoginTime { set; get; }
 
+        /// <summary>
+        /// 版本号(用于撤回jwt)
+        /// </summary>
+        public int JwtVersion { get; set; }
+
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 
 
@@ -55,6 +60,10 @@ namespace IdentityService.Domain
         public void UpdateLastLoginTime()
         {
             LastLoginTime = DateTime.Now;
+        }
+        public void UpdateVersion()
+        {
+            JwtVersion++;
         }
     }
 }

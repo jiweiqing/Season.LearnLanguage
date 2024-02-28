@@ -18,7 +18,7 @@ namespace IdentityService.Infrastructure
         public JwtDto CreateToken(long userId, IEnumerable<Claim> claims)
         {
             string accessToken = CreateAccessToken(claims);
-            string refreshToken = CreateRefreshToken(claims);
+            string refreshToken = CreateRefreshToken(claims.Where(c => c.Type == JwtRegisteredClaimNames.Sub || c.Type == IdentityContants.Version));
 
             return new JwtDto()
             {
