@@ -14,4 +14,8 @@
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Learning.Domain\Learning.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

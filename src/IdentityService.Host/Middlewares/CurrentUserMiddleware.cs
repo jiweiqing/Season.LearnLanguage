@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Security.Claims;
+using Learning.Domain;
 
 namespace IdentityService.Host
 {

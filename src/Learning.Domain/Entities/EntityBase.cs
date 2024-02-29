@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IdentityService.Domain
+namespace Learning.Domain
 {
     public class EntityBase<TKey>
     {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IdentityService.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Learning.Domain;
 
 namespace IdentityService.Host.Controllers
 {

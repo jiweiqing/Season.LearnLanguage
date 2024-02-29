@@ -1,6 +1,6 @@
-﻿namespace IdentityService.Domain
+﻿namespace Learning.Domain
 {
-    public class BusinessException: Exception
+    public class BusinessException : Exception
     {
         public BusinessException()
         {

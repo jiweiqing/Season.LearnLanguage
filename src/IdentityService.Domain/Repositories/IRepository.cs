@@ -58,7 +58,7 @@ namespace IdentityService.Domain
         /// </summary>
         /// <param name="predicate">表达式</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>List<TEntity>/returns>
+        /// <returns></returns>
         Task<List<TEntity>> GetListAsync(
             Expression<Func<TEntity, bool>> predicate,
             CancellationToken cancellationToken = default);

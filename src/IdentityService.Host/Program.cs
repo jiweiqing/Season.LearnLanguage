@@ -15,6 +15,8 @@ using IdentityService.Domain;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Reflection;
+using Learning.AspNetCore;
+using Learning.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -180,7 +182,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseAutoSaveChange();
+app.UseAutoSaveChange<IdentityServiceDbContext>();
 
 using (var serviceScope = app.Services.CreateScope())
 {

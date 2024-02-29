@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Domain
+﻿namespace Learning.Domain
 {
     public class DeletionEntity : ModificationEntity, IFullAuditedObject
     {

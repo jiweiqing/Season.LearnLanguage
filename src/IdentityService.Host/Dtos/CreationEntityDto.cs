@@ -1,4 +1,4 @@
-﻿using IdentityService.Domain;
+﻿using Learning.Domain;
 
 namespace IdentityService.Host
 {

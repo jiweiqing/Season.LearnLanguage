@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityService.Domain
+namespace Learning.Domain
 {
-    public interface IAggregateRoot
+    public interface IDependency
     {
     }
 }
