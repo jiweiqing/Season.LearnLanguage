@@ -168,7 +168,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.UseAutoSaveChange();
+app.UseAutoSaveChange<FileServiceDbContext>();
 
 app.MapControllers();
 
