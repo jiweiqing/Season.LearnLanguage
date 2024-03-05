@@ -1,10 +1,9 @@
-﻿using IdentityService.Domain;
+﻿using Learning.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Linq.Expressions;
-using Learning.Domain;
 
-namespace IdentityService.Infrastructure
+namespace Learning.Infrastructure
 {
     public static class EntityTypeBuilderExtensions
     {

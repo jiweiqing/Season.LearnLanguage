@@ -1,6 +1,7 @@
 ﻿using IdentityService.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Learning.Infrastructure;
 
 namespace IdentityService.Infrastructure
 {

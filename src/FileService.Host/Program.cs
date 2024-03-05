@@ -141,6 +141,9 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHeaders = ForwardedHeaders.All;
 });
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
+
 
 var app = builder.Build();
 

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IdentityService.Domain\IdentityService.Domain.csproj" />
+    <ProjectReference Include="..\Learning.Infrastructure\Learning.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

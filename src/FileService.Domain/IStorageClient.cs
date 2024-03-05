@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileService.Domain
 {
-    public interface IStorageClinet
+    public interface IStorageClient
     {
         StorageType StorageType { get; }
 
@@ -17,6 +17,6 @@ namespace FileService.Domain
         /// <param name="stream">文件内容</param>
         /// <param name="cancellationToken"></param>
         /// <returns>保存的文件</returns>
-        Task<Uri> SaveAsync(string key,Stream stream,CancellationToken cancellationToken = default);
+        Task<string> SaveAsync(string key,Stream stream,CancellationToken cancellationToken = default);
     }
 }

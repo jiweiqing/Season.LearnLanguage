@@ -13,7 +13,7 @@ namespace FileService.Infrastructure
     {
         public FileServiceDbContext CreateDbContext(string[] args)
         {
-            string hostPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "IdentityService.Host");
+            string hostPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "FileService.Host");
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(hostPath)
