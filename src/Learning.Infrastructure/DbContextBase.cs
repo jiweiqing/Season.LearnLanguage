@@ -20,7 +20,7 @@ namespace Learning.Infrastructure
             }
         }
 
-        public DbContextBase(DbContextOptions options) : base(options)
+        protected DbContextBase(DbContextOptions options) : base(options)
         {
         }
 
