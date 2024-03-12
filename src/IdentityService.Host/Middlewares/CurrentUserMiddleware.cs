@@ -23,7 +23,7 @@ namespace IdentityService.Host
             {
                 // claims 是否包含NameIdentifier
                 Claim? claim = context.User.FindFirst(ClaimTypes.NameIdentifier);
-                Claim? versionClaim = context.User.FindFirst(IdentityContants.Version);
+                Claim? versionClaim = context.User.FindFirst(Contants.Version);
                 if (claim != null && versionClaim != null)
                 {
                     long userId = Convert.ToInt64(claim.Value);

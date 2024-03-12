@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Reflection;
 using Learning.AspNetCore;
 using Learning.Domain;
+using Learning.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -172,7 +173,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.All
 });
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

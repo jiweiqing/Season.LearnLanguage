@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Infrastructure
+﻿namespace Learning.Infrastructure
 {
     public class JwtOptions
     {

@@ -44,7 +44,7 @@ namespace FileService.Domain
             long fileByteSize, 
             string fileName, 
             string fileHash, 
-            string backupUrl, 
+            string? backupUrl, 
             string remoteUrl)
         {
             FileUploadRecord item = new FileUploadRecord(id)

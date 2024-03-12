@@ -1,12 +1,11 @@
-﻿using IdentityService.Domain;
-using IdentityService.Infrastructure;
+﻿using Learning.Domain;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace IdentityService.Infrastructure
+namespace Learning.Infrastructure
 {
     public class JwtService : IJwtService
     {
@@ -18,7 +17,7 @@ namespace IdentityService.Infrastructure
         public JwtDto CreateToken(long userId, IEnumerable<Claim> claims)
         {
             string accessToken = CreateAccessToken(claims);
-            string refreshToken = CreateRefreshToken(claims.Where(c => c.Type == JwtRegisteredClaimNames.Sub || c.Type == IdentityContants.Version));
+            string refreshToken = CreateRefreshToken(claims.Where(c => c.Type == JwtRegisteredClaimNames.Sub || c.Type == Contants.Version));
 
             return new JwtDto()
             {

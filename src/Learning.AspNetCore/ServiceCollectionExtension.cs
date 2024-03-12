@@ -1,14 +1,15 @@
 ﻿using Learning.Domain;
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-
+using System.Reflection.Metadata;
 namespace Learning.AspNetCore
 {
     public static class ServiceCollectionExtension
     {
+        private static List<Assembly> assemblies = new List<Assembly>();
         public static IServiceCollection RunModuleInitializers(this IServiceCollection services)
         {
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            LoadAllAssemblies();
+            //Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly assembly in assemblies)
             {
                 Type[] types = assembly.GetTypes();
@@ -35,11 +36,22 @@ namespace Learning.AspNetCore
         /// <param name="services"></param>
         public static void AutomaticRegisterService(this IServiceCollection services)
         {
-            string path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
+            // 获取入口程序的目录路径
+            string entryAssemblyLocation = Assembly.GetEntryAssembly()!.Location;
+            string entryDirectory = Path.GetDirectoryName(entryAssemblyLocation)!;
 
-            var referencedAssemblies = Directory.GetFiles(path, "IdentityService.*.dll").Select(Assembly.LoadFrom).ToArray();
+            // 获取目录下的所有程序集文件
+            string[] assemblyFiles = Directory.GetFiles(entryDirectory, "*.dll");
+            List<Assembly> list = new List<Assembly>();
+            foreach (string assemblyFile in assemblyFiles)
+            {
+                list.Add(Assembly.LoadFrom(assemblyFile));
+            }
+            //string path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
 
-            var allTypes = referencedAssemblies.SelectMany(a => a.GetTypes());
+            //var referencedAssemblies = Directory.GetFiles(path, "IdentityService.*.dll").Select(Assembly.LoadFrom).ToArray();
+
+            var allTypes = list.SelectMany(a => a.GetTypes());
 
             #region interfaces
             // 实现接口方式注入服务
@@ -69,6 +81,24 @@ namespace Learning.AspNetCore
             }
 
             #endregion
+        }
+
+        private static void LoadAllAssemblies()
+        {
+            if (assemblies.Any())
+            {
+                return;
+            }
+            // 获取入口程序的目录路径
+            string entryAssemblyLocation = Assembly.GetEntryAssembly()!.Location;
+            string entryDirectory = Path.GetDirectoryName(entryAssemblyLocation)!;
+
+            // 获取目录下的所有程序集文件
+            string[] assemblyFiles = Directory.GetFiles(entryDirectory, "*.dll");
+            foreach (string assemblyFile in assemblyFiles)
+            {
+                assemblies.Add(Assembly.LoadFrom(assemblyFile));
+            }
         }
 
         private static void AddScoped(IServiceCollection services, Type classType, Type[]? iTypes)

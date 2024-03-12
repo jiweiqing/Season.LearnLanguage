@@ -45,7 +45,7 @@ namespace IdentityService.Domain
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString(),ClaimValueTypes.String),
                 new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString(),ClaimValueTypes.Integer64),
                 new Claim(JwtRegisteredClaimNames.Iat, iat.ToString(), ClaimValueTypes.Integer64),
-                new Claim(IdentityContants.Version,user.JwtVersion.ToString(),ClaimValueTypes.Integer32)
+                new Claim(Contants.Version,user.JwtVersion.ToString(),ClaimValueTypes.Integer32)
             };
 
 

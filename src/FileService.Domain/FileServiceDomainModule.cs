@@ -1,10 +1,5 @@
 ﻿using Learning.Domain;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Yitter.IdGenerator;
 
 namespace FileService.Domain
@@ -19,6 +14,7 @@ namespace FileService.Domain
 
             //var newId = YitIdHelper.NextId();
             services.AddScoped<FileDomainService>();
+            services.AddScoped<CurrentUserContext>();
         }
     }
 }

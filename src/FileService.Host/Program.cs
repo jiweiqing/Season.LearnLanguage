@@ -12,6 +12,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.HttpOverrides;
+using Learning.Domain;
+using FileService.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +36,6 @@ builder.Services.AddDbContext<FileServiceDbContext>(options =>
 {
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(builder.Configuration["Mysql:Version"]));
 });
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -163,9 +164,11 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.All
 });
 
+app.UseStaticFiles();
+
 app.UseAuthentication();
 
-app.UseCurrentUser();
+//app.UseCurrentUser();
 
 app.UseAuthorization();
 

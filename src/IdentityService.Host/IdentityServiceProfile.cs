@@ -1,9 +1,19 @@
 ﻿using AutoMapper;
+using IdentityService.Domain;
 
 namespace IdentityService.Host
 {
     public class IdentityServiceProfile : Profile
     {
-        // TODO:
+        public IdentityServiceProfile()
+        {
+            #region user
+
+            CreateMap<GetUsersInput, IncludesUsersInput>();
+            CreateMap<User, UserDto>();
+
+            #endregion
+
+        }
     }
 }

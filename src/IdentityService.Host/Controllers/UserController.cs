@@ -2,6 +2,7 @@
 using IdentityService.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Learning.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IdentityService.Host.Controllers
 {
@@ -10,6 +11,7 @@ namespace IdentityService.Host.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;

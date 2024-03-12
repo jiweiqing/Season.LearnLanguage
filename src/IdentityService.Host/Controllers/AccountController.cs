@@ -1,4 +1,5 @@
 ﻿using IdentityService.Domain;
+using Learning.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

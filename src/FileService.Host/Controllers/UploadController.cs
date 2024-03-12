@@ -17,11 +17,11 @@ namespace IdentityService.Host
     {
         private readonly FileServiceDbContext _dbContext;
         private readonly FileDomainService _domainService;
-        private readonly FileRepository _fileRepository;
+        private readonly IFileRepository _fileRepository;
         public UploadController(
             FileServiceDbContext dbContext,
             FileDomainService domainService,
-            FileRepository repository) 
+            IFileRepository repository) 
         {
             _dbContext = dbContext;
             _domainService = domainService;
@@ -54,7 +54,7 @@ namespace IdentityService.Host
         }
 
         [HttpPost]
-        public async Task<UploadResultDto> Upload([FromForm] IFormFile file, CancellationToken cancellationToken = default)
+        public async Task<UploadResultDto> Upload(IFormFile file, CancellationToken cancellationToken = default)
         {
             string fileName = file.FileName;
             using Stream stream = file.OpenReadStream();

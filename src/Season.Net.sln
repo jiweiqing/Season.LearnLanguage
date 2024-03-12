@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning.AspNetCore", "Lear
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning.Domain", "Learning.Domain\Learning.Domain.csproj", "{EF8A09EB-BFAF-4E3B-9795-151150CE2A6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning.Infrastructure", "Learning.Infrastructure\Learning.Infrastructure.csproj", "{A40AC5C7-6160-4354-9C06-FF820DAEFEFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning.Infrastructure", "Learning.Infrastructure\Learning.Infrastructure.csproj", "{A40AC5C7-6160-4354-9C06-FF820DAEFEFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileService.SDK.Net", "FileService.SDK.Net\FileService.SDK.Net.csproj", "{E015F32E-3CCC-45CA-9819-ED24C6E03CD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{A40AC5C7-6160-4354-9C06-FF820DAEFEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A40AC5C7-6160-4354-9C06-FF820DAEFEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A40AC5C7-6160-4354-9C06-FF820DAEFEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E015F32E-3CCC-45CA-9819-ED24C6E03CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E015F32E-3CCC-45CA-9819-ED24C6E03CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E015F32E-3CCC-45CA-9819-ED24C6E03CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E015F32E-3CCC-45CA-9819-ED24C6E03CD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{E220AD53-F475-4FFF-90BE-6BF4C35F0E70} = {3C8328B9-6141-4903-AB6C-CBC2D5EAEAAD}
 		{EF8A09EB-BFAF-4E3B-9795-151150CE2A6C} = {3C8328B9-6141-4903-AB6C-CBC2D5EAEAAD}
 		{A40AC5C7-6160-4354-9C06-FF820DAEFEFE} = {3C8328B9-6141-4903-AB6C-CBC2D5EAEAAD}
+		{E015F32E-3CCC-45CA-9819-ED24C6E03CD1} = {81AE44A2-6A95-435E-8BC9-D48BCD7C1E81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D80D0C7F-B9AB-494C-8EF6-1DA970609473}

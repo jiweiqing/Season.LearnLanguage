@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityService.Domain
+namespace Learning.Domain
 {
-    public class IdentityContants
+    public class Contants
     {
         public const string Version = "version";
     }

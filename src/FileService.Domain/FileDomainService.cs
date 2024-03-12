@@ -37,18 +37,18 @@ namespace FileService.Domain
 
             stream.Position = 0;
 
-            // 备份服务器 速度快
-            string backUrl = await _backupStorageClinet.SaveAsync(key, stream, cancellationToken);
-
             // 远程服务器
+            //string backUrl = await _backupStorageClinet.SaveAsync(key, stream, cancellationToken);
+
+            // 备份服务器
             stream.Position = 0;
-            string remoteUrl = await _remoteStorageClinet.SaveAsync(key, stream, cancellationToken);
+            string remoteUrl = await _backupStorageClinet.SaveAsync(key, stream, cancellationToken);
 
             stream.Position = 0;
 
             long id = YitIdHelper.NextId();
 
-            return FileUploadRecord.Create(id, fileSize, fileName, hash, backUrl, remoteUrl);
+            return FileUploadRecord.Create(id, fileSize, fileName, hash, null, remoteUrl);
         }
     }
 }

@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Learning.AspNetCore\Learning.AspNetCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

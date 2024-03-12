@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityService.Domain
+namespace Learning.Domain
 {
     public interface IJwtService
     {
