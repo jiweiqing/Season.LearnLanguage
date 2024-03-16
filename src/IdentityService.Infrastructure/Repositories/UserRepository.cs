@@ -1,10 +1,7 @@
 ﻿using IdentityService.Domain;
+using Learning.Domain;
+using Learning.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IdentityService.Infrastructure
 {
@@ -28,9 +25,8 @@ namespace IdentityService.Infrastructure
 
         public async Task<List<User>> GetListAsync(IncludesUsersInput input)
         {
-            var query = Build(DbSet, input);
+            var query = Build(DbSet, input,true);
 
-            query = query.OrderByDescending(u => u.CreationTime).Skip(input.SkipCount).Take(input.MaxResultCount);
             return await query.ToListAsync();
         }
 
@@ -55,8 +51,9 @@ namespace IdentityService.Infrastructure
         /// </summary>
         /// <param name="query"></param>
         /// <param name="input"></param>
+        /// <param name="paged"></param>
         /// <returns></returns>
-        private IQueryable<User> Build(IQueryable<User> query, IncludesUsersInput input)
+        private IQueryable<User> Build(IQueryable<User> query, IncludesUsersInput input, bool paged = false)
         {
             query = query
                 .WhereIf(!string.IsNullOrWhiteSpace(input.UserName), u => u.UserName.Contains(input.UserName!))
@@ -68,9 +65,12 @@ namespace IdentityService.Infrastructure
                 query = query.Include(c => c.UserRoles).ThenInclude(ur => ur.Role);
             }
 
+            if (paged)
+            {
+                query = query.OrderBy(c => c.CreationTime).Page(input);
+            }
+
             return query;
         }
-
-        
     }
 }

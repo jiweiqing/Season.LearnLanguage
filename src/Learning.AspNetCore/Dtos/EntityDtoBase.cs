@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Host.Dtos
+﻿namespace Learning.AspNetCore
 {
     public class EntityDtoBase
     {

@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Host
+﻿namespace Learning.AspNetCore
 {
     public class PagedResult<T>
     {

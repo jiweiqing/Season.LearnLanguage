@@ -9,8 +9,8 @@ namespace IdentityService.Host
     /// 账号相关
     /// </summary>
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class AccountController : ControllerBase
     {
         private readonly UserDomainService _userService;

@@ -1,10 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-namespace IdentityService.Domain
+namespace Learning.Domain
 {
-    /// <summary>
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
     public interface IRepository<TEntity> where TEntity : class
     {
         /// <summary>

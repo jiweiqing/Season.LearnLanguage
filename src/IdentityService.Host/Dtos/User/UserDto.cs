@@ -1,5 +1,5 @@
 ﻿using IdentityService.Domain;
-using IdentityService.Host.Dtos;
+using Learning.AspNetCore;
 
 namespace IdentityService.Host
 {

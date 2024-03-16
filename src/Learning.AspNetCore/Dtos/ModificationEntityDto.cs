@@ -1,6 +1,6 @@
 ﻿using Learning.Domain;
 
-namespace IdentityService.Host
+namespace Learning.AspNetCore
 {
     public class ModificationEntityDto: CreationEntityDto, IAuditedObject
     {

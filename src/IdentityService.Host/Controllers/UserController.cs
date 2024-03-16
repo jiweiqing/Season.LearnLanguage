@@ -3,6 +3,7 @@ using IdentityService.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Learning.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Learning.AspNetCore;
 
 namespace IdentityService.Host.Controllers
 {

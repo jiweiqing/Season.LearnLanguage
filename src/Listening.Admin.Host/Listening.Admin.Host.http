@@ -1,0 +1,6 @@
+@Listening.Admin.Host_HostAddress = http://localhost:5261
+
+GET {{Listening.Admin.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

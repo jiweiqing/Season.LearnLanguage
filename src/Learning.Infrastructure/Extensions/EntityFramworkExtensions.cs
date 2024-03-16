@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
+﻿using Learning.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityService.Infrastructure
+namespace Learning.Infrastructure
 {
-    public static class IQueryableExtensions
+    public static class EntityFramworkExtensions
     {
         /// <summary>
         /// where if
@@ -46,6 +46,34 @@ namespace IdentityService.Infrastructure
             }
 
             return source;
+        }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="condition"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static IQueryable<TEntity> PageIf<TEntity>(this IQueryable<TEntity> source, bool condition, PagedInput input)
+        {
+            // TODO: 默认排序
+            return condition ? source.Skip(input.SkipCount).Take(input.MaxResultCount) : source;
+        }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="condition"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static IQueryable<TEntity> Page<TEntity>(this IQueryable<TEntity> source, PagedInput input)
+        {
+            // TODO: 默认排序
+            return  source.Skip(input.SkipCount).Take(input.MaxResultCount);
         }
     }
 }

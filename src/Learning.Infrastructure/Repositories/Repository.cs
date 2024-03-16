@@ -1,24 +1,19 @@
-﻿using IdentityService.Domain;
+﻿using Learning.Domain;
+using Learning.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Learning.Domain;
 
-namespace IdentityService.Infrastructure
+namespace Learning.Infrastructure
 {
     public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency where TEntity : class
     {
-        public Repository(IdentityServiceDbContext context)
+        public Repository(DbContextBase context)
         {
             EfContext = context;
         }
 
         // TODO:改为dbcontext的基类
-        public IdentityServiceDbContext EfContext { get; }
+        public DbContextBase EfContext { get; }
 
         public DbSet<TEntity> DbSet => EfContext.Set<TEntity>();
 
@@ -84,7 +79,7 @@ namespace IdentityService.Infrastructure
     public class Repository<TKey, TEntity>
         : Repository<TEntity>, IRepository<TKey, TEntity> where TEntity : EntityBase<TKey>
     {
-        public Repository(IdentityServiceDbContext context) : base(context)
+        public Repository(DbContextBase context) : base(context)
         {
         }
 
