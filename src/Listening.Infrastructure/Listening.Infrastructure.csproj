@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Learning.Infrastructure\Learning.Infrastructure.csproj" />
-    <ProjectReference Include="..\Listening.Domain\Listening.Domain.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityConfigs\" />
+    <ProjectReference Include="..\Learning.Infrastructure\Learning.Infrastructure.csproj" />
+    <ProjectReference Include="..\Listening.Domain\Listening.Domain.csproj" />
   </ItemGroup>
 
 </Project>

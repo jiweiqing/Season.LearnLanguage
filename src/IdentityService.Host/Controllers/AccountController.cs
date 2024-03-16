@@ -10,7 +10,6 @@ namespace IdentityService.Host
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
     public class AccountController : ControllerBase
     {
         private readonly UserDomainService _userService;
