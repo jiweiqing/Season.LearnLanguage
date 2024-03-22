@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -51,7 +52,7 @@ namespace IdentityService.Domain
 
             if (user.UserName == "admin")
             {
-                claims.Add(new Claim(ClaimTypes.Role, "Admin", ClaimValueTypes.String));
+                claims.Add(new Claim("role", "Admin"));
             }
             return _jwtService.CreateToken(user.Id, claims);
         }

@@ -13,7 +13,8 @@
 
         public void SetValue(long? id, string? userName)
         {
-            SetValue(id, userName);
+            Id = id;
+            UserName = userName;
         }
     }
 }

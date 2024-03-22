@@ -50,7 +50,7 @@ namespace Learning.AspNetCore
                     {
                         if (action.ActionMethod.ReturnType.GenericTypeArguments[0].GetGenericArguments().Any())
                         {
-                            returnType = action.ActionMethod.ReturnType.GenericTypeArguments[0].GetGenericArguments()[0];
+                            returnType = action.ActionMethod.ReturnType.GenericTypeArguments[0];
                         }
                     }
 
