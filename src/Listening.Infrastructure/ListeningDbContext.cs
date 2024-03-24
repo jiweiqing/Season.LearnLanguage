@@ -1,11 +1,6 @@
 ﻿using Learning.Infrastructure;
 using Listening.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Listening.Infrastructure
 {
@@ -18,6 +13,7 @@ namespace Listening.Infrastructure
         #region DbSet
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Album> Albums  { get; set; }
 
         #endregion
     }

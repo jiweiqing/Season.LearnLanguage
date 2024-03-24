@@ -159,16 +159,16 @@ app.UseCors("AllCrosDomainsPolicy");
 
 app.UseAppExceptionHandler(app.Environment);
 
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.All
-});
+//app.UseForwardedHeaders(new ForwardedHeadersOptions
+//{
+//    ForwardedHeaders = ForwardedHeaders.All
+//});
 
 app.UseStaticFiles();
 
 app.UseAuthentication();
 
-//app.UseCurrentUser();
+app.UseCurrentUser();
 
 app.UseAuthorization();
 

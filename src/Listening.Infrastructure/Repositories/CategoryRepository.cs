@@ -20,12 +20,12 @@ namespace Listening.Infrastructure
             return await Build(DbSet, input,true).ToListAsync();
         }
 
-        private IQueryable<Category> Build(IQueryable<Category> query, GetCategoriesInput input, bool page = false)
+        private IQueryable<Category> Build(IQueryable<Category> query, GetCategoriesInput input, bool paged = false)
         {
             query = query
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Name), c => c.Name.Contains(input.Name!));
 
-            if (page)
+            if (paged)
             {
                 query = query.OrderBy(c => c.CreationTime).Page(input);
             }

@@ -8,6 +8,8 @@ namespace Listening.Admin.Host
         public ListeningProfile() 
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<Album, AlbumDto>();
+            CreateMap<Episode, EpisodeDto>();
         }
     }
 }

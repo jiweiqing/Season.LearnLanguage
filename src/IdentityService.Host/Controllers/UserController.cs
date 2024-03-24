@@ -78,7 +78,8 @@ namespace IdentityService.Host.Controllers
 
             var dto = _mapper.Map<UserDto>(user);
 
-            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id }, user);
+            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id }, dto);
+            //return CreatedAtAction("Get", new { id = dto.Id }, dto);
         }
 
         /// <summary>
