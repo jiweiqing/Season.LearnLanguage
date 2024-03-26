@@ -13,6 +13,8 @@ namespace Listening.Infrastructure
             builder.Property(e => e.Name).HasMaxLength(FieldConstants.MaxNameLength).IsRequired();
             builder.Property(e => e.SubtitleType).HasMaxLength(FieldConstants.MaxCodeLength)
                 .HasConversion<string>().IsRequired();
+            builder.Property(e => e.Resource).HasMaxLength(FieldConstants.MaxPathLength).IsRequired();
+            builder.Property(e => e.Subtitle).IsRequired();
 
             builder.HasIndex(e => e.Name);
             builder.HasIndex(e => e.AlbumId);

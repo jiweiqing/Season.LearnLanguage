@@ -1,10 +1,4 @@
 ﻿using Learning.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Listening.Domain
 {
@@ -16,21 +10,22 @@ namespace Listening.Domain
             _albumRepository = albumRepository;
         }
 
-        public async Task<Album> CreateAsync(int sortOrder, string name, long categoryId, string? description)
+        public async Task<Album> CreateAsync(string name, long categoryId, string? description)
         {
-            Album album = Album.Create(sortOrder, name, categoryId, description);
+            int maxOrder = await _albumRepository.GetMaxSortOrderAsync();
+            Album album = Album.Create(maxOrder, name, categoryId, description);
             await _albumRepository.InsertAsync(album);
             return album;
         }
 
-        public async Task<Album> UpdateAsync(long id, int sortOrder, string name, long categoryId, string? description)
+        public async Task<Album> UpdateAsync(long id,string name,string? description)
         {
             var ablum = await _albumRepository.GetAsync(id);
             if (ablum == null)
             {
                 throw new BusinessException("专辑不存在");
             }
-            ablum.Update(sortOrder, name, categoryId, description); 
+            ablum.Update(name, description); 
             return ablum;
         }
 

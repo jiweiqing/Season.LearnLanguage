@@ -14,7 +14,7 @@ namespace Listening.Infrastructure
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Album> Albums  { get; set; }
-
+        public DbSet<Episode> Episodes { get; set; }
         #endregion
     }
 }

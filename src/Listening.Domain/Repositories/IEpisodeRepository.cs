@@ -16,5 +16,10 @@ namespace Listening.Domain
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<Episode>> GetListAsync(GetEpisodesInput input);
+        /// <summary>
+        /// 获取最大排序
+        /// </summary>
+        /// <returns></returns>
+        Task<int> GetMaxSortOrderAsync();
     }
 }

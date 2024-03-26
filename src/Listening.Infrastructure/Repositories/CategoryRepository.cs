@@ -20,6 +20,11 @@ namespace Listening.Infrastructure
             return await Build(DbSet, input,true).ToListAsync();
         }
 
+        public async Task<int> GetMaxSortOrderAsync()
+        {
+            return await DbSet.MaxAsync(c => c.SortOrder);
+        }
+
         private IQueryable<Category> Build(IQueryable<Category> query, GetCategoriesInput input, bool paged = false)
         {
             query = query

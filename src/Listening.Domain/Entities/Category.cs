@@ -58,9 +58,8 @@ namespace Listening.Domain
         /// <param name="name">名称</param>
         /// <param name="imageUrl">图片路径</param>
         /// <returns></returns>
-        public Category Update(int sortOrder, string name, string imageUrl)
+        public Category Update(string name, string imageUrl)
         {
-            this.SortOrder = sortOrder;
             this.Name = name;
             this.ImageUrl = imageUrl;
             return this;

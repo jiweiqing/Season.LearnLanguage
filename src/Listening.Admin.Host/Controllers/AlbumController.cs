@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Listening.Admin.Host.Controllers
 {
+    /// <summary>
+    /// 专辑相关
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AlbumController : ControllerBase
@@ -21,7 +24,13 @@ namespace Listening.Admin.Host.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 获取专辑列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<PagedResult<AlbumDto>> GetListAsync(GetAlbumsInput input)
         {
             var ablums = await _albumRepository.GetListAsync(input);
@@ -42,6 +51,7 @@ namespace Listening.Admin.Host.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:long}")]
+        [Authorize(Roles = "Admin")]
         public async Task<AlbumDto> GetAsync(long id)
         {
             var ablum = await _albumRepository.GetAsync(id);
@@ -63,7 +73,7 @@ namespace Listening.Admin.Host.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AlbumDto>> CreateAsync(CreateAlbumDto input)
         {
-            var album = await _albumDomainService.CreateAsync(input.SortOrder, input.Name, input.CategoryId, input.Description);
+            var album = await _albumDomainService.CreateAsync(input.Name, input.CategoryId, input.Description);
             var dto = _mapper.Map<AlbumDto>(album);
             return CreatedAtAction(nameof(GetAsync), new { id = dto.Id });
         }
@@ -76,9 +86,9 @@ namespace Listening.Admin.Host.Controllers
         /// <returns></returns>
         [HttpPut("{id:long}")]
         [Authorize(Roles = "Admin")]
-        public async Task UpdateAsync(long id, CreateAlbumDto input)
+        public async Task UpdateAsync(long id, UpdateAlbumDto input)
         {
-            await _albumDomainService.UpdateAsync(id,input.SortOrder, input.Name, input.CategoryId, input.Description);
+            await _albumDomainService.UpdateAsync(id,input.Name,input.Description);
         }
 
         /// <summary>

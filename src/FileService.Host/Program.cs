@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.HttpOverrides;
 using Learning.Domain;
 using FileService.Domain;
+using Learning.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

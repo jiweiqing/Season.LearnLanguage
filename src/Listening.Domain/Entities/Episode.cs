@@ -115,18 +115,15 @@ namespace Listening.Domain
         /// <param name="sortOrder"></param>
         /// <returns></returns>
         public Episode Update(
-            long albumId, string name, 
+            string name, 
             string resource, double duration, 
-            string subtitle, SubtitleType subtitleType, 
-            int sortOrder)
+            string subtitle, SubtitleType subtitleType)
         {
-            AlbumId = albumId;
             Name = name;
             Resource = resource;
             Duration = duration;
             Subtitle = subtitle;
             SubtitleType = subtitleType;
-            SortOrder = sortOrder;
             return this;
         }
 

@@ -17,5 +17,11 @@ namespace Listening.Domain
         /// <param name="input"></param>
         /// <returns></returns>
         Task<int> CountAsync(GetAlbumsInput input);
+
+        /// <summary>
+        /// 获取最大的排序
+        /// </summary>
+        /// <returns></returns>
+        Task<int> GetMaxSortOrderAsync();
     }
 }

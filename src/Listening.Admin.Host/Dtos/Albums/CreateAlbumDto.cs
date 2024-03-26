@@ -1,25 +1,14 @@
-﻿namespace Listening.Admin.Host
+﻿using Listening.Domain;
+using System.ComponentModel.DataAnnotations;
+
+namespace Listening.Admin.Host
 {
-    public class CreateAlbumDto
+    public class CreateAlbumDto: UpdateAlbumDto
     {
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string Name { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 排序
-        /// </summary>
-        public int SortOrder { get; set; }
-
         /// <summary>
         /// 分类id
         /// </summary>
+        [Required]
         public long CategoryId { get; set; }
-
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string? Description { get; set; }
     }
 }

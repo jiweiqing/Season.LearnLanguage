@@ -1,9 +1,4 @@
 ﻿using Learning.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Listening.Domain
 {
@@ -22,9 +17,10 @@ namespace Listening.Domain
         /// <param name="name">名称</param>
         /// <param name="imageUrl">封面路径</param>
         /// <returns></returns>
-        public async Task<Category> CreateAsync(int sortOrder, string name, string imageUrl)
+        public async Task<Category> CreateAsync(string name, string imageUrl)
         {
-            Category category = Category.Create(sortOrder, name, imageUrl);
+            int maxOrder = await _repository.GetMaxSortOrderAsync();
+            Category category = Category.Create(maxOrder, name, imageUrl);
 
             await _repository.InsertAsync(category);
 
@@ -40,7 +36,7 @@ namespace Listening.Domain
         /// <param name="imageUrl"></param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public async Task<Category> UpdateAsync(long id, int sortOrder, string name, string imageUrl)
+        public async Task<Category> UpdateAsync(long id, string name, string imageUrl)
         {
             Category? category = await _repository.GetAsync(id);
             if (category == null)
@@ -48,7 +44,7 @@ namespace Listening.Domain
                 throw new BusinessException("此分类不存在");
             }
 
-            category.Update(sortOrder, name, imageUrl);
+            category.Update(name, imageUrl);
             return category;
         }
 

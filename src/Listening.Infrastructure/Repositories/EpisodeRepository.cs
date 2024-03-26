@@ -20,11 +20,18 @@ namespace Listening.Infrastructure
             return await Build(DbSet, input, true).ToListAsync();
         }
 
+        public Task<int> GetMaxSortOrderAsync()
+        {
+            return DbSet.MaxAsync(x => x.SortOrder);
+        }
+
         private IQueryable<Episode> Build(IQueryable<Episode> query, GetEpisodesInput input, bool paged = false)
         {
             query = query
                .WhereIf(!string.IsNullOrWhiteSpace(input.Name), c => c.Name.Contains(input.Name!))
-               .WhereIf(input.SubtitleType.HasValue, c => c.SubtitleType == input.SubtitleType);
+               .WhereIf(input.SubtitleType.HasValue, c => c.SubtitleType == input.SubtitleType)
+               .WhereIf(input.IsEnable.HasValue, c => c.IsEabled == input.IsEnable)
+               .WhereIf(input.AlbumId.HasValue, c => c.AlbumId == input.AlbumId);
 
             if (paged)
             {

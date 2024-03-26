@@ -50,11 +50,9 @@ namespace Listening.Domain
             return album;
         }
 
-        public Album Update(int sortOrder, string name, long categoryId,string? description)
+        public Album Update(string name,string? description)
         {
-            this.CategoryId = categoryId;
             this.Name = name;
-            this.SortOrder = sortOrder;
             this.Description = description;
             return this;
         }

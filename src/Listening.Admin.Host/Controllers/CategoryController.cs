@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using Learning.AspNetCore;
+using Learning.Domain;
 using Listening.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Listening.Admin.Host
 {
+    /// <summary>
+    /// 获取分类列表
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -51,8 +55,12 @@ namespace Listening.Admin.Host
         {
             var category = await _repository.GetAsync(id);
 
-            var dto = _mapper.Map<CategoryDto>(category);
+            if (category == null)
+            {
+                throw new BusinessException("分类不存在");
+            }
 
+            var dto = _mapper.Map<CategoryDto>(category);
             return dto;
         }
 
@@ -65,7 +73,7 @@ namespace Listening.Admin.Host
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CategoryDto>> CreateAsync(CreateCategoryDto create)
         {
-            var category = await _domainService.CreateAsync(create.SortOrder, create.Name, create.ImageUrl);
+            var category = await _domainService.CreateAsync(create.Name, create.ImageUrl);
             var dto = _mapper.Map<CategoryDto>(category);
             return CreatedAtAction(nameof(GetAsync), new { id = dto.Id });
         }
@@ -80,7 +88,7 @@ namespace Listening.Admin.Host
         [Authorize(Roles = "Admin")]
         public async Task UpdateAsync(long id, UpdateCategoryDto update)
         {
-            await _domainService.UpdateAsync(id, update.SortOrder, update.Name, update.ImageUrl);
+            await _domainService.UpdateAsync(id, update.Name, update.ImageUrl);
         }
 
         /// <summary>

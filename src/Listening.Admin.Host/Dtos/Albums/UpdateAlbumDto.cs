@@ -3,20 +3,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Listening.Admin.Host
 {
-    public class CreateCategoryDto
+    public class UpdateAlbumDto
     {
         /// <summary>
-        /// 分类名称
+        /// 名称
         /// </summary>
-        [Required]
         [MaxLength(FieldConstants.MaxNameLength)]
+        [Required]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// 封面url
+        /// 描述
         /// </summary>
-        [Required]
-        [MaxLength(FieldConstants.MaxNameLength)]
-        public string ImageUrl { get; set; } = string.Empty;
+        [MaxLength(FieldConstants.MaxDescriptionLength)]
+        public string? Description { get; set; }
     }
 }
