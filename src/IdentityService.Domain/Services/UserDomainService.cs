@@ -64,19 +64,21 @@ namespace IdentityService.Domain
         /// <param name="refreshToken"></param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public async Task<JwtDto> RefreshTokenAsync(string accessToken, string refreshToken)
+        public async Task<JwtDto?> RefreshTokenAsync(string accessToken, string refreshToken)
         {
             bool result = _jwtService.ValidateToken(accessToken, refreshToken, out long userId);
             if (!result)
             {
-                throw new BusinessException("token非法");
+                //throw new BusinessException("token非法");
+                return null;
             }
 
             // TODO：后续可以加是否禁用
             User? user = await _repository.GetAsync(userId);
             if (user == null)
             {
-                throw new BusinessException("token非法");
+                //throw new BusinessException("token非法");
+                return null;
             }
 
             // TODO:如果refresh token没有过期,那么重新生成refresh token时就不更新refresh token
