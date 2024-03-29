@@ -31,9 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Listening", "Listening", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listening.Domain", "Listening.Domain\Listening.Domain.csproj", "{77870C9E-327E-41CE-8F4E-4C6E2747DCC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Listening.Infrastructure", "Listening.Infrastructure\Listening.Infrastructure.csproj", "{2ED473C3-B395-4292-9548-C05CD27D6397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listening.Infrastructure", "Listening.Infrastructure\Listening.Infrastructure.csproj", "{2ED473C3-B395-4292-9548-C05CD27D6397}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Listening.Admin.Host", "Listening.Admin.Host\Listening.Admin.Host.csproj", "{3D18CA61-42BF-4EBC-BA2A-5825E30530D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listening.Admin.Host", "Listening.Admin.Host\Listening.Admin.Host.csproj", "{3D18CA61-42BF-4EBC-BA2A-5825E30530D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaning.EventBus", "Leaning.EventBus\Leaning.EventBus.csproj", "{48E0FA55-9D46-412A-85F3-622EC7745896}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{3D18CA61-42BF-4EBC-BA2A-5825E30530D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D18CA61-42BF-4EBC-BA2A-5825E30530D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D18CA61-42BF-4EBC-BA2A-5825E30530D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48E0FA55-9D46-412A-85F3-622EC7745896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E0FA55-9D46-412A-85F3-622EC7745896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48E0FA55-9D46-412A-85F3-622EC7745896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48E0FA55-9D46-412A-85F3-622EC7745896}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{77870C9E-327E-41CE-8F4E-4C6E2747DCC8} = {96562D41-7B5A-41F0-9F8D-88AF1EBD49A6}
 		{2ED473C3-B395-4292-9548-C05CD27D6397} = {96562D41-7B5A-41F0-9F8D-88AF1EBD49A6}
 		{3D18CA61-42BF-4EBC-BA2A-5825E30530D7} = {96562D41-7B5A-41F0-9F8D-88AF1EBD49A6}
+		{48E0FA55-9D46-412A-85F3-622EC7745896} = {3C8328B9-6141-4903-AB6C-CBC2D5EAEAAD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D80D0C7F-B9AB-494C-8EF6-1DA970609473}

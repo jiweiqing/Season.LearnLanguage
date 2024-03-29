@@ -1,7 +1,7 @@
 ﻿using Listening.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Listening.Admin.Host.Dtos.Episodes
+namespace Listening.Admin.Host
 {
     /// <summary>
     /// 只允许修改名称和字幕

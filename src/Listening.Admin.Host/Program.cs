@@ -15,6 +15,12 @@ using Learning.Domain;
 using Listening.Infrastructure;
 using System.Text.Json;
 using Learning.Infrastructure;
+using Listening.Admin.Host;
+using Leaning.EventBus;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using StackExchange.Redis;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -148,6 +154,19 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 
+// 转码帮助类
+builder.Services.AddScoped<EncodingEpisodeHelper>();
+// event bus
+// rabbit mq options
+builder.Services.Configure<IntegrationEventRabbitMQOptions>(builder.Configuration.GetSection("RabbitMQ"));
+// todo:程序集的获取等,需要优化
+builder.Services.AddEventBus("Listening.Admin", ServiceCollectionExtension.assemblies);
+
+// Redis
+//Redis的配置 TODO: 配置文件还差 rabbit以及redis相关的配置
+string redisConnStr = builder.Configuration.GetValue<string>("Redis:ConnectionString")!;
+ConnectionMultiplexer redisConnMultiplexer = ConnectionMultiplexer.Connect(redisConnStr);
+builder.Services.AddSingleton(typeof(IConnectionMultiplexer),redisConnMultiplexer);
 
 var app = builder.Build();
 
@@ -157,6 +176,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FileService.WebAPI v1"));
 }
+
+// 事件总线
+app.UseEventBus();
 
 app.UseCors("AllCrosDomainsPolicy");
 

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Listening.Domain.Events
+namespace Listening.Domain
 {
     /// <summary>
     /// 删除音频事件

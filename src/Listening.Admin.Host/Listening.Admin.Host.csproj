@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leaning.EventBus\Leaning.EventBus.csproj" />
     <ProjectReference Include="..\Learning.AspNetCore\Learning.AspNetCore.csproj" />
     <ProjectReference Include="..\Listening.Domain\Listening.Domain.csproj" />
     <ProjectReference Include="..\Listening.Infrastructure\Listening.Infrastructure.csproj" />

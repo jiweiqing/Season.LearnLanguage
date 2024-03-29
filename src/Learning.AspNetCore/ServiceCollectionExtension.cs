@@ -6,7 +6,7 @@ namespace Learning.AspNetCore
 {
     public static class ServiceCollectionExtension
     {
-        private static List<Assembly> assemblies = new List<Assembly>();
+        public static List<Assembly> assemblies = new List<Assembly>();
         public static IServiceCollection RunModuleInitializers(this IServiceCollection services)
         {
             LoadAllAssemblies();

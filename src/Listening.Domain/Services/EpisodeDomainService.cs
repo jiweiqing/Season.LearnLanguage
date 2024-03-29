@@ -1,4 +1,5 @@
 ﻿using Learning.Domain;
+using System;
 
 namespace Listening.Domain
 {
@@ -44,7 +45,6 @@ namespace Listening.Domain
         /// <exception cref="BusinessException"></exception>
         public async Task<Episode> UpdateAsync(
             long id, string name,
-            string resource, double duration,
             string subtitle, SubtitleType subtitleType)
         {
             var episode = await _episodeRepository.GetAsync(id);
@@ -52,8 +52,8 @@ namespace Listening.Domain
             {
                 throw new BusinessException("专辑不存在");
             }
-            episode.Update(name, resource, duration, subtitle, subtitleType);
-            return episode;
+            episode.Update(name, subtitle, subtitleType);
+            return episode!;
         }
 
         /// <summary>
@@ -63,9 +63,12 @@ namespace Listening.Domain
         /// <returns></returns>
         public async Task DeleteAsync(long id)
         {
-            await _episodeRepository.DeleteAsync(id);
-
-            // TODO:发送事件,删除服务器上的音频
+            var epsiode = await _episodeRepository.GetAsync(id);
+            if (epsiode != null)
+            {
+                epsiode.Delete();
+            }
+            await _episodeRepository.DeleteAsync(epsiode);
         }
     }
 }

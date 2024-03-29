@@ -116,14 +116,12 @@ namespace Listening.Domain
         /// <returns></returns>
         public Episode Update(
             string name, 
-            string resource, double duration, 
             string subtitle, SubtitleType subtitleType)
         {
             Name = name;
-            Resource = resource;
-            Duration = duration;
             Subtitle = subtitle;
             SubtitleType = subtitleType;
+            this.AddDomainEventIfAbsent(new EpisodeUpdatedEvent(this));
             return this;
         }
 
@@ -142,7 +140,7 @@ namespace Listening.Domain
 
         public void Delete()
         {
-            AddDomainEventIfAbsent(new EpisodeUpdatedEvent(this));
+            AddDomainEventIfAbsent(new EpisodeDeletedEvent(this.Id));
         }
 
         public IEnumerable<Sentence> ParseSubtitle()
