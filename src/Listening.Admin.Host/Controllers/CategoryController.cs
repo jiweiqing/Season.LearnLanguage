@@ -71,9 +71,9 @@ namespace Listening.Admin.Host
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<CategoryDto>> CreateAsync(CreateCategoryDto create)
+        public async Task<ActionResult<CategoryDto>> CreateAsync(CreateCategoryDto createDto)
         {
-            var category = await _domainService.CreateAsync(create.Name, create.ImageUrl);
+            var category = await _domainService.CreateAsync(createDto.Name, createDto.ImageUrl);
             var dto = _mapper.Map<CategoryDto>(category);
             return CreatedAtAction(nameof(GetAsync), new { id = dto.Id });
         }

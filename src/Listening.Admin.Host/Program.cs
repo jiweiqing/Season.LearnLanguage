@@ -1,26 +1,21 @@
+using Leaning.EventBus;
 using Learning.AspNetCore;
+using Learning.Infrastructure;
+using Listening.Admin.Host;
+using Listening.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using StackExchange.Redis;
 using System.Reflection;
 using System.Text;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.HttpOverrides;
-using Learning.Domain;
-using Listening.Infrastructure;
 using System.Text.Json;
-using Learning.Infrastructure;
-using Listening.Admin.Host;
-using Leaning.EventBus;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using StackExchange.Redis;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -95,7 +90,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 
     string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
-    string[] xmlFiles = Directory.GetFiles(path, "IdentityService.*.xml");
+    string[] xmlFiles = Directory.GetFiles(path, "*.xml");
     foreach (string xmlFile in xmlFiles)
     {
         options.IncludeXmlComments(xmlFile, true);
