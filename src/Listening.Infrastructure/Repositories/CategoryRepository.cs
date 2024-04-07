@@ -17,12 +17,12 @@ namespace Listening.Infrastructure
 
         public async Task<List<Category>> GetListAsync(GetCategoriesInput input)
         {
-            return await Build(DbSet, input,true).ToListAsync();
+            return await Build(DbSet, input, true).ToListAsync();
         }
 
         public async Task<int> GetMaxSortOrderAsync()
         {
-            return await DbSet.MaxAsync(c => c.SortOrder);
+            return await DbSet.OrderByDescending(c => c.SortOrder).Select(c => c.SortOrder).FirstOrDefaultAsync();
         }
 
         private IQueryable<Category> Build(IQueryable<Category> query, GetCategoriesInput input, bool paged = false)

@@ -2,11 +2,8 @@
 using Leaning.EventBus;
 using Learning.AspNetCore;
 using Learning.Domain;
-using Learning.Infrastructure;
 using Listening.Domain;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using System.Collections.Generic;
 using Yitter.IdGenerator;
 
 namespace Listening.Admin.Host.Controllers

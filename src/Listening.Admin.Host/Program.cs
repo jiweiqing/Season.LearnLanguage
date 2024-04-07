@@ -39,7 +39,7 @@ builder.Services.AddDbContext<ListeningDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(builder.Configuration["Mysql:Version"]));
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -134,7 +134,7 @@ builder.Services.Configure<JsonOptions>(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.KebabCaseUpper;
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
 });
 
 // mediatR

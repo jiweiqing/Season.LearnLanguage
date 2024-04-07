@@ -43,7 +43,7 @@ namespace Listening.Infrastructure
 
         public async Task<int> GetMaxSortOrderAsync()
         {
-            return await DbSet.MaxAsync(c => c.SortOrder);
+            return await DbSet.OrderByDescending(c => c.SortOrder).Select(c => c.SortOrder).FirstOrDefaultAsync();
         }
     }
 }

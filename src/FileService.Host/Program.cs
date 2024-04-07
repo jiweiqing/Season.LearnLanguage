@@ -132,6 +132,9 @@ builder.Services.ConfigureApiBehaviorOptions();
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
 // mediatR

@@ -14,6 +14,10 @@ namespace Listening.Domain
 
             //var newId = YitIdHelper.NextId();
             services.AddScoped<CurrentUserContext>();
+            services.AddScoped<CategoryDomainService>();
+            services.AddScoped<AlbumDomainService>();
+            services.AddScoped<EpisodeDomainService>();
+
         }
     }
 }

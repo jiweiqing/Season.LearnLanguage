@@ -13,14 +13,13 @@ namespace Listening.Domain
         /// <summary>
         /// 创建分类
         /// </summary>
-        /// <param name="sortOrder">排序</param>
         /// <param name="name">名称</param>
         /// <param name="imageUrl">封面路径</param>
         /// <returns></returns>
         public async Task<Category> CreateAsync(string name, string imageUrl)
         {
             int maxOrder = await _repository.GetMaxSortOrderAsync();
-            Category category = Category.Create(maxOrder, name, imageUrl);
+            Category category = Category.Create(maxOrder + 1, name, imageUrl);
 
             await _repository.InsertAsync(category);
 
@@ -31,7 +30,6 @@ namespace Listening.Domain
         /// 更新分类
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="sortOrder"></param>
         /// <param name="name"></param>
         /// <param name="imageUrl"></param>
         /// <returns></returns>

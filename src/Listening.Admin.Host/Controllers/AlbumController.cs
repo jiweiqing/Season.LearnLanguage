@@ -31,7 +31,7 @@ namespace Listening.Admin.Host.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<PagedResult<AlbumDto>> GetListAsync(GetAlbumsInput input)
+        public async Task<PagedResult<AlbumDto>> GetListAsync([FromQuery] GetAlbumsInput input)
         {
             var ablums = await _albumRepository.GetListAsync(input);
             int count = await _albumRepository.CountAsync(input);
@@ -75,7 +75,7 @@ namespace Listening.Admin.Host.Controllers
         {
             var album = await _albumDomainService.CreateAsync(input.Name, input.CategoryId, input.Description);
             var dto = _mapper.Map<AlbumDto>(album);
-            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id });
+            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id }, dto);
         }
 
         /// <summary>

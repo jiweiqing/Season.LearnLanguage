@@ -75,7 +75,7 @@ namespace Listening.Admin.Host
         {
             var category = await _domainService.CreateAsync(createDto.Name, createDto.ImageUrl);
             var dto = _mapper.Map<CategoryDto>(category);
-            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id });
+            return CreatedAtAction(nameof(GetAsync), new { id = dto.Id }, dto);
         }
 
         /// <summary>
