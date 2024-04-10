@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Learning.AspNetCore;
 using Learning.Domain;
+using Listening.Admin.Host.Controllers;
 using Listening.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,7 @@ namespace Listening.Admin.Host
     /// <summary>
     /// 获取分类列表
     /// </summary>
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoryController : ListeningControllerBase
     {
         private readonly ICategoryRepository _repository;
         private readonly CategoryDomainService _domainService;

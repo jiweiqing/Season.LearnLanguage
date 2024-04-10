@@ -11,9 +11,7 @@ namespace Listening.Admin.Host.Controllers
     /// <summary>
     /// 音频相关(暂时不可用)
     /// </summary>
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EpisodeController : ControllerBase
+    public class EpisodeController : ListeningControllerBase
     {
         private readonly IEpisodeRepository _episodeRepository;
         private readonly EpisodeDomainService _episodeDomainService;

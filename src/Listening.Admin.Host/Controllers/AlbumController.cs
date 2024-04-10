@@ -10,9 +10,7 @@ namespace Listening.Admin.Host.Controllers
     /// <summary>
     /// 专辑相关
     /// </summary>
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AlbumController : ControllerBase
+    public class AlbumController : ListeningControllerBase
     {
         private readonly IAlbumRepository _albumRepository;
         private readonly AlbumDomainService _albumDomainService;
