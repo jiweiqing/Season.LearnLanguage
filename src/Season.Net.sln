@@ -35,7 +35,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listening.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listening.Admin.Host", "Listening.Admin.Host\Listening.Admin.Host.csproj", "{3D18CA61-42BF-4EBC-BA2A-5825E30530D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaning.EventBus", "Leaning.EventBus\Leaning.EventBus.csproj", "{48E0FA55-9D46-412A-85F3-622EC7745896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leaning.EventBus", "Leaning.EventBus\Leaning.EventBus.csproj", "{48E0FA55-9D46-412A-85F3-622EC7745896}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MediaEncoder", "MediaEncoder", "{32359151-E574-4198-983F-9C26CB39E87D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaEncoder.Domain", "MediaEncoder.Domain\MediaEncoder.Domain.csproj", "{A9E0B66D-0E7C-4635-9BBC-F658A8AE3B8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaEncoder.Infrastructure", "MediaEncoder.Infrastructure\MediaEncoder.Infrastructure.csproj", "{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaEncoder.Host", "MediaEncoder.Host\MediaEncoder.Host.csproj", "{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +107,18 @@ Global
 		{48E0FA55-9D46-412A-85F3-622EC7745896}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48E0FA55-9D46-412A-85F3-622EC7745896}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48E0FA55-9D46-412A-85F3-622EC7745896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E0B66D-0E7C-4635-9BBC-F658A8AE3B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E0B66D-0E7C-4635-9BBC-F658A8AE3B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E0B66D-0E7C-4635-9BBC-F658A8AE3B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E0B66D-0E7C-4635-9BBC-F658A8AE3B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +135,9 @@ Global
 		{2ED473C3-B395-4292-9548-C05CD27D6397} = {96562D41-7B5A-41F0-9F8D-88AF1EBD49A6}
 		{3D18CA61-42BF-4EBC-BA2A-5825E30530D7} = {96562D41-7B5A-41F0-9F8D-88AF1EBD49A6}
 		{48E0FA55-9D46-412A-85F3-622EC7745896} = {3C8328B9-6141-4903-AB6C-CBC2D5EAEAAD}
+		{A9E0B66D-0E7C-4635-9BBC-F658A8AE3B8E} = {32359151-E574-4198-983F-9C26CB39E87D}
+		{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6} = {32359151-E574-4198-983F-9C26CB39E87D}
+		{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E} = {32359151-E574-4198-983F-9C26CB39E87D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D80D0C7F-B9AB-494C-8EF6-1DA970609473}
