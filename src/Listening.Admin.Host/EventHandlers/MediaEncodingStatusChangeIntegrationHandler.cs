@@ -3,6 +3,7 @@
 //using Listening.Domain;
 //using Listening.Infrastructure;
 //using Microsoft.AspNetCore.SignalR;
+//using System.Xml.Linq;
 
 //namespace Listening.Admin.Host.EventHandlers
 //{
@@ -16,18 +17,18 @@
 //    class MediaEncodingStatusChangeIntegrationHandler : DynamicIntegrationEventHandler
 //    {
 //        private readonly ListeningDbContext dbContext;
-//        private readonly IListeningRepository repository;
+//        private readonly IEpisodeRepository _repository;
 //        private readonly EncodingEpisodeHelper encHelper;
 //        private readonly IHubContext<EpisodeEncodingStatusHub> hubContext;
 
 //        public MediaEncodingStatusChangeIntegrationHandler(ListeningDbContext dbContext,
 //            EncodingEpisodeHelper encHelper,
-//            IHubContext<EpisodeEncodingStatusHub> hubContext, IListeningRepository repository)
+//            IHubContext<EpisodeEncodingStatusHub> hubContext, IEpisodeRepository repository)
 //        {
 //            this.dbContext = dbContext;
 //            this.encHelper = encHelper;
 //            this.hubContext = hubContext;
-//            this.repository = repository;
+//            this._repository = repository;
 //        }
 
 //        public override async Task HandleDynamic(string eventName, dynamic eventData)
@@ -37,7 +38,7 @@
 //            {
 //                return;
 //            }
-//            Guid id = Guid.Parse(eventData.Id);//EncodingItem的Id就是Episode 的Id
+//            long id = long.Parse(eventData.Id);//EncodingItem的Id就是Episode 的Id
 
 //            switch (eventName)
 //            {
@@ -60,18 +61,14 @@
 //                    Uri outputUrl = new Uri(eventData.OutputUrl);
 //                    var encItem = await encHelper.GetEncodingEpisodeAsync(id);
 
-//                    Guid albumId = encItem.AlbumId;
-//                    int maxSeq = await repository.GetMaxSeqOfEpisodesAsync(albumId);
+//                    long albumId = encItem.AlbumId;
+//                    int maxOrder = await _repository.GetMaxSortOrderAsync(albumId);
 //                    /*
 //                    Episode episode = Episode.Create(id, maxSeq.Value + 1, encodingEpisode.Name, albumId, outputUrl,
 //                        encodingEpisode.DurationInSecond, encodingEpisode.SubtitleType, encodingEpisode.Subtitle);*/
-//                    var builder = new Episode.Builder();
-//                    builder.Id(id).SequenceNumber(maxSeq + 1).Name(encItem.Name)
-//                        .AlbumId(albumId).AudioUrl(outputUrl)
-//                        .DurationInSecond(encItem.DurationInSecond)
-//                        .SubtitleType(encItem.SubtitleType).Subtitle(encItem.Subtitle);
-//                    var episdoe = builder.Build();
-//                    dbContext.Add(episdoe);
+//                    var episopde = Episode.Create(maxOrder, encItem.Name, albumId, encItem.Resource, encItem.Duration, encItem.Subtitle, encItem.SubtitleType);
+
+//                    dbContext.Add(episopde);
 //                    await dbContext.SaveChangesAsync();
 //                    await hubContext.Clients.All.SendAsync("OnMediaEncodingCompleted", id);//通知前端刷新
 //                    break;

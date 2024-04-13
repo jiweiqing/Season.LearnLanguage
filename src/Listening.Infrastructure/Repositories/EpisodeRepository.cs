@@ -20,9 +20,9 @@ namespace Listening.Infrastructure
             return await Build(DbSet, input, true).ToListAsync();
         }
 
-        public Task<int> GetMaxSortOrderAsync()
+        public Task<int> GetMaxSortOrderAsync(long albumId)
         {
-            return DbSet.MaxAsync(x => x.SortOrder);
+            return DbSet.Where(e => e.AlbumId == albumId).OrderByDescending(e => e.SortOrder).Select(e => e.SortOrder).FirstOrDefaultAsync();
         }
 
         private IQueryable<Episode> Build(IQueryable<Episode> query, GetEpisodesInput input, bool paged = false)
@@ -35,7 +35,7 @@ namespace Listening.Infrastructure
 
             if (paged)
             {
-                query = query.OrderBy(c => c.CreationTime).Page(input);
+                query = query.OrderByDescending(c => c.CreationTime).Page(input);
             }
             return query;
         }

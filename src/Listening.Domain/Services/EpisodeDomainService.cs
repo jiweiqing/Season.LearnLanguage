@@ -26,8 +26,8 @@ namespace Listening.Domain
             string resource, double duration,
             string subtitle, SubtitleType subtitleType)
         {
-            var maxOrder = await _episodeRepository.GetMaxSortOrderAsync();
-            Episode episode = Episode.Create(maxOrder, name, albumId, resource, duration, subtitle, subtitleType);
+            var maxOrder = await _episodeRepository.GetMaxSortOrderAsync(albumId);
+            Episode episode = Episode.Create(maxOrder + 1, name, albumId, resource, duration, subtitle, subtitleType);
             await _episodeRepository.InsertAsync(episode);
             return episode;
         }
@@ -37,8 +37,6 @@ namespace Listening.Domain
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="resource"></param>
-        /// <param name="duration"></param>
         /// <param name="subtitle"></param>
         /// <param name="subtitleType"></param>
         /// <returns></returns>
@@ -64,10 +62,11 @@ namespace Listening.Domain
         public async Task DeleteAsync(long id)
         {
             var epsiode = await _episodeRepository.GetAsync(id);
-            if (epsiode != null)
+            if (epsiode == null)
             {
-                epsiode.Delete();
+                return;
             }
+            epsiode.Delete();
             await _episodeRepository.DeleteAsync(epsiode);
         }
     }

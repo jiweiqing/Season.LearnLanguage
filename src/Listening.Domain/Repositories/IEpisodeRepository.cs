@@ -20,6 +20,6 @@ namespace Listening.Domain
         /// 获取最大排序
         /// </summary>
         /// <returns></returns>
-        Task<int> GetMaxSortOrderAsync();
+        Task<int> GetMaxSortOrderAsync(long albumId);
     }
 }

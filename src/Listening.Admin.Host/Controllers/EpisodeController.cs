@@ -38,7 +38,7 @@ namespace Listening.Admin.Host.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedResult<EpisodeDto>> GetListAsync(GetEpisodesInput input)
+        public async Task<PagedResult<EpisodeDto>> GetListAsync([FromQuery] GetEpisodesInput input)
         {
             var count = await _episodeRepository.CountAsync(input);
 
@@ -78,35 +78,40 @@ namespace Listening.Admin.Host.Controllers
         [HttpPost]
         public async Task<ActionResult<EpisodeDto>> CreateAsync(CreateEpisodeDto dto)
         {
-            // 如果上传的是m4a文件,不用转码,直接存到数据库
-            if (dto.Resource.EndsWith("m4a", StringComparison.OrdinalIgnoreCase))
-            {
-                var episode = await _episodeDomainService.CreateAsync(dto.Name, dto.AlbumId, dto.Resource, dto.Duration, dto.Subtitle, dto.SubtitleType);
-                EpisodeDto episodeDto = _mapper.Map<EpisodeDto>(episode);
-                return CreatedAtAction(nameof(GetAsync), new { id = episode.Id }, episodeDto);
-            }
-            else
-            {
-                // 非m4a文件需要先转码,临时插入redis,转码完成再插入数据库
-                // 音频id
-                long id = YitIdHelper.NextId();
-                EncodingEpisodeInfo episodeInfo = new EncodingEpisodeInfo()
-                {
-                    Id = id,
-                    Name = dto.Name,
-                    AlbumId = dto.AlbumId,
-                    Resource = dto.Resource,
-                    Duration = dto.Duration,
-                    Subtitle = dto.Subtitle,
-                    SubtitleType = dto.SubtitleType,
-                    Status = "Created"
-                };
 
-                await _encodingEpisodeHelper.AddEncodingEpisodeAsync(id, episodeInfo);
-                // TODO:通知转码服务,启动转码. 转码服务未实现
-                _eventBus.Publish("MediaEncoding.Created", new { MediaId = id, MediaUrl = episodeInfo.Resource, OutputFormat = "m4a", SourceSystem = "Listening" });
-                return Ok();
-            }
+            var episode = await _episodeDomainService.CreateAsync(dto.Name, dto.AlbumId, dto.Resource, dto.Duration, dto.Subtitle, dto.SubtitleType);
+            EpisodeDto episodeDto = _mapper.Map<EpisodeDto>(episode);
+            return CreatedAtAction(nameof(GetAsync), new { id = episode.Id }, episodeDto);
+
+            //// 如果上传的是m4a文件,不用转码,直接存到数据库
+            //if (dto.Resource.EndsWith("m4a", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    var episode = await _episodeDomainService.CreateAsync(dto.Name, dto.AlbumId, dto.Resource, dto.Duration, dto.Subtitle, dto.SubtitleType);
+            //    EpisodeDto episodeDto = _mapper.Map<EpisodeDto>(episode);
+            //    return CreatedAtAction(nameof(GetAsync), new { id = episode.Id }, episodeDto);
+            //}
+            //else
+            //{
+            //    // 非m4a文件需要先转码,临时插入redis,转码完成再插入数据库
+            //    // 音频id
+            //    long id = YitIdHelper.NextId();
+            //    EncodingEpisodeInfo episodeInfo = new EncodingEpisodeInfo()
+            //    {
+            //        Id = id,
+            //        Name = dto.Name,
+            //        AlbumId = dto.AlbumId,
+            //        Resource = dto.Resource,
+            //        Duration = dto.Duration,
+            //        Subtitle = dto.Subtitle,
+            //        SubtitleType = dto.SubtitleType,
+            //        Status = "Created"
+            //    };
+
+            //    await _encodingEpisodeHelper.AddEncodingEpisodeAsync(id, episodeInfo);
+            //    // TODO:通知转码服务,启动转码. 转码服务未实现
+            //    _eventBus.Publish("MediaEncoding.Created", new { MediaId = id, MediaUrl = episodeInfo.Resource, OutputFormat = "m4a", SourceSystem = "Listening" });
+            //    return Ok();
+            //}
         }
 
         /// <summary>
@@ -138,6 +143,7 @@ namespace Listening.Admin.Host.Controllers
         /// <param name="albumId"></param>
         /// <returns></returns>
         [HttpGet("{albumId:long}/encoding")]
+        [Obsolete("暂不可用")]
         public async Task<List<EncodingEpisodeInfo>> GetEncodingEpisodesByAlbumIdAsync(long albumId)
         {
             List<EncodingEpisodeInfo> episodeInfos = new List<EncodingEpisodeInfo>();
@@ -178,7 +184,7 @@ namespace Listening.Admin.Host.Controllers
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
         [HttpPut]
-        [Route("{id}/disable")]
+        [Route("{id}/disabled")]
         public async Task DisableAsync(long id)
         {
             var episode = await _episodeRepository.GetAsync(id);
