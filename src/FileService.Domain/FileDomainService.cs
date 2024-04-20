@@ -29,11 +29,11 @@ namespace FileService.Domain
             DateTime today = DateTime.Today;
             // 文件保存目录
             string key = $"{today.Year}/{today.Month}/{today.Day}/{hash}/{fileName}";
-            var oldFileRecord = await _fileRepository.FindFileAsync(fileSize, hash);
-            if (oldFileRecord != null) 
-            {
-                return oldFileRecord;
-            }
+            //var oldFileRecord = await _fileRepository.FindFileAsync(fileSize, hash);
+            //if (oldFileRecord != null) 
+            //{
+            //    return oldFileRecord;
+            //}
 
             stream.Position = 0;
 

@@ -56,10 +56,11 @@ namespace IdentityService.Host
         [HttpPost]
         public async Task<UploadResultDto> Upload(IFormFile file, CancellationToken cancellationToken = default)
         {
+            // TODO:需要细改
             string fileName = file.FileName;
             using Stream stream = file.OpenReadStream();
             var record = await _domainService.UploadAsync(stream, fileName, cancellationToken);
-            _dbContext.Add(record);
+            //_dbContext.Add(record);
             UploadResultDto result = new UploadResultDto()
             {
                 Url = record.RemoteUrl
