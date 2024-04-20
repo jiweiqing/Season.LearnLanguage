@@ -195,6 +195,54 @@ namespace Listening.Admin.Host.Controllers
             episode.Show();
         }
 
+        /// <summary>
+        /// 获取音频列表 —— 前台使用
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet("front")]
+        public async Task<PagedResult<EpisodeFrontDto>> GetListByFrontAsync([FromQuery] GetEpisodesInput input)
+        {
+            var count = await _episodeRepository.CountAsync(input);
+
+            var episodes = await _episodeRepository.GetListAsync(input);
+
+            var dtos = _mapper.Map<List<EpisodeFrontDto>>(episodes);
+
+            PagedResult<EpisodeFrontDto> pagedResult = new PagedResult<EpisodeFrontDto>(dtos, count);
+
+            return pagedResult;
+        }
+
+        /// <summary>
+        /// 获取指定音频
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <returns></returns>
+        [HttpGet("{id:long}/front")]
+        public async Task<EpisodeFrontDto> GetByFrontAsync(long id)
+        {
+            var episode = await _episodeRepository.GetAsync(id);
+
+            if (episode == null)
+            {
+                throw new BusinessException("音频不存在!");
+            }
+
+            var dto = _mapper.Map<EpisodeFrontDto>(episode);
+            dto.Sentences = new List<SentenceDto>();
+
+            var sentences = episode.ParseSubtitle();
+            foreach (Sentence s in sentences)
+            {
+                SentenceDto vm = new SentenceDto(s.StartTime.TotalSeconds, s.EndTime.TotalSeconds, s.Value);
+                dto.Sentences.Add(vm);
+            }
+
+
+            return dto;
+        }
+
         // TODO:排序接口
     }
 }

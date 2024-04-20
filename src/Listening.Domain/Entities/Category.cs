@@ -54,7 +54,6 @@ namespace Listening.Domain
         /// <summary>
         /// 更新
         /// </summary>
-        /// <param name="sortOrder">排序</param>
         /// <param name="name">名称</param>
         /// <param name="imageUrl">图片路径</param>
         /// <returns></returns>

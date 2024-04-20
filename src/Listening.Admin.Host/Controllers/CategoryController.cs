@@ -32,6 +32,7 @@ namespace Listening.Admin.Host
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public async Task<PagedResult<CategoryDto>> GetListAsync([FromQuery] GetCategoriesInput input)
         {
             var count = await _repository.CountAsync(input);
@@ -50,6 +51,7 @@ namespace Listening.Admin.Host
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:long}")]
+        [Authorize]
         public async Task<CategoryDto> GetAsync(long id)
         {
             var category = await _repository.GetAsync(id);
@@ -100,6 +102,43 @@ namespace Listening.Admin.Host
         public async Task DeleteAsync(long id)
         {
             await _domainService.DeleteAsync(id);
+        }
+
+        /// <summary>
+        /// 获取分类列表 —— 前台使用
+        /// </summary>
+        /// <param name="input">输入参数</param>
+        /// <returns></returns>
+        [HttpGet("front")]
+        public async Task<PagedResult<CategoryDto>> GetListByFrontAsync([FromQuery] GetCategoriesInput input)
+        {
+            var count = await _repository.CountAsync(input);
+            var categories = await _repository.GetListAsync(input);
+
+            var dtos = _mapper.Map<List<CategoryDto>>(categories);
+
+            PagedResult<CategoryDto> pagedResult = new PagedResult<CategoryDto>(dtos, count);
+
+            return pagedResult;
+        }
+
+        /// <summary>
+        /// 获取指定的分类 —— 前台使用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id:long}/front")]
+        public async Task<CategoryDto> GetByFrontAsync(long id)
+        {
+            var category = await _repository.GetAsync(id);
+
+            if (category == null)
+            {
+                throw new BusinessException("分类不存在");
+            }
+
+            var dto = _mapper.Map<CategoryDto>(category);
+            return dto;
         }
     }
 }

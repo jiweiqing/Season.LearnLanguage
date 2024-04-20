@@ -12,7 +12,7 @@ namespace Listening.Domain
     {
         public bool Accept(SubtitleType subtitleType)
         {
-            return subtitleType == SubtitleType.json;
+            return subtitleType == SubtitleType.lrc;
         }
 
         public IEnumerable<Sentence> Parse(string subtitle)
