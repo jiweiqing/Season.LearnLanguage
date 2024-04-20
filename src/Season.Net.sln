@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaEncoder.Domain", "Medi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaEncoder.Infrastructure", "MediaEncoder.Infrastructure\MediaEncoder.Infrastructure.csproj", "{A8CECB21-C42D-43D9-85D6-DD8BEB97CCE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaEncoder.Host", "MediaEncoder.Host\MediaEncoder.Host.csproj", "{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaEncoder.Host", "MediaEncoder.Host\MediaEncoder.Host.csproj", "{94636EC6-F6D5-4DEA-90B6-0BA57D2EFB1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace Listening.Admin.Host
+﻿namespace Learning.AspNetCore
 {
     public class LowercaseParameterTransformer: IOutboundParameterTransformer
     {
