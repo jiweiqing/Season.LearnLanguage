@@ -174,7 +174,7 @@ namespace Listening.Admin.Host.Controllers
             {
                 throw new BusinessException("音频不存在");
             }
-            episode.Hide();
+            episode.Show();
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Listening.Admin.Host.Controllers
             {
                 throw new BusinessException("音频不存在");
             }
-            episode.Show();
+            episode.Hide();
         }
 
         /// <summary>

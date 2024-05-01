@@ -67,6 +67,5 @@ namespace IdentityService.Host
             };
             return result;
         }
-
     }
 }
