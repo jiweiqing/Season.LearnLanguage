@@ -23,5 +23,15 @@ namespace Listening.Admin.Host
         /// 分类id
         /// </summary>
         public long CategoryId { get; set; }
+
+        /// <summary>
+        /// 分类名称
+        /// </summary>
+        public string? CategoryName { get; set; }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string? Description { get; set; }
     }
 }

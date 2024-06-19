@@ -20,5 +20,11 @@ namespace Listening.Domain
         /// </summary>
         /// <returns></returns>
         Task<int> GetMaxSortOrderAsync();
+        /// <summary>
+        /// 依据id数组获取类别
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        Task<List<Category>> GetListByIds(long[] ids);
     }
 }

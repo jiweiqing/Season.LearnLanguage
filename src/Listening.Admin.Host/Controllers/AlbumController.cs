@@ -15,11 +15,17 @@ namespace Listening.Admin.Host.Controllers
     {
         private readonly IAlbumRepository _albumRepository;
         private readonly AlbumDomainService _albumDomainService;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public AlbumController(IAlbumRepository albumRepository, AlbumDomainService albumDomainService, IMapper mapper)
+        public AlbumController(
+            IAlbumRepository albumRepository,
+            AlbumDomainService albumDomainService,
+            ICategoryRepository categoryRepository,
+            IMapper mapper)
         {
             _albumRepository = albumRepository;
             _albumDomainService = albumDomainService;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
 
@@ -36,6 +42,12 @@ namespace Listening.Admin.Host.Controllers
             int count = await _albumRepository.CountAsync(input);
 
             List<AlbumDto> dtos = _mapper.Map<List<AlbumDto>>(ablums);
+
+            var categories = await _categoryRepository.GetListByIds(dtos.Select(a => a.CategoryId).Distinct().ToArray());
+            foreach (var item in dtos)
+            {
+                item.CategoryName = categories.Where(c => c.Id == item.CategoryId).FirstOrDefault()?.Name;
+            }
 
             return new PagedResult<AlbumDto>
             {
@@ -60,6 +72,10 @@ namespace Listening.Admin.Host.Controllers
             }
 
             AlbumDto dto = _mapper.Map<AlbumDto>(ablum);
+
+            var categories = await _categoryRepository.GetListByIds([dto.CategoryId]);
+            dto.CategoryName = categories.FirstOrDefault()?.Name;
+
             return dto;
         }
 
@@ -87,7 +103,7 @@ namespace Listening.Admin.Host.Controllers
         [Authorize]
         public async Task UpdateAsync(long id, UpdateAlbumDto input)
         {
-            await _albumDomainService.UpdateAsync(id,input.Name,input.Description);
+            await _albumDomainService.UpdateAsync(id, input.Name, input.Description);
         }
 
         /// <summary>
@@ -111,7 +127,7 @@ namespace Listening.Admin.Host.Controllers
         public async Task<PagedResult<AlbumDto>> GetListByFrontAsync([FromQuery] GetAlbumsBaseInput baseInput)
         {
             GetAlbumsInput input = _mapper.Map<GetAlbumsInput>(baseInput);
-            input.IsEabled = true;
+            //input.IsEabled = true;
 
             var ablums = await _albumRepository.GetListAsync(input);
             int count = await _albumRepository.CountAsync(input);

@@ -25,6 +25,12 @@ namespace Listening.Infrastructure
             return await DbSet.OrderByDescending(c => c.SortOrder).Select(c => c.SortOrder).FirstOrDefaultAsync();
         }
 
+        public async Task<List<Category>> GetListByIds(long[] ids)
+        {
+            return await DbSet.Where(c => ids.Contains(c.Id)).AsNoTracking().ToListAsync();
+        }
+
+
         private IQueryable<Category> Build(IQueryable<Category> query, GetCategoriesInput input, bool paged = false)
         {
             query = query
